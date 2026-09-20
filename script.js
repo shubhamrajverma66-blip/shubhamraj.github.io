@@ -1,17 +1,19 @@
-/* =========================================================
-   SHUBHAM RAJ PORTFOLIO
-   INTERACTIVE JAVASCRIPT
-========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =======================================================
-     CURSOR GLOW
-  ======================================================= */
+  /* =========================================================
+     CUSTOM CURSOR
+     ========================================================= */
 
-  const glow = document.querySelector(".cursor-glow");
+  const cursor = document.querySelector(".cursor-glow");
 
-  if (glow) {
+  const interactiveBlocks = document.querySelectorAll(
+    ".timeline-item, .mun-card, .skill-card, .achievement-item, .contact-card, .university-card, .achievement-photo-box, .section-photo, .contact-photo, .primary-btn, .secondary-btn, .certificate-link"
+  );
+
+  if (
+    cursor &&
+    window.matchMedia("(pointer:fine)").matches
+  ) {
 
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -20,28 +22,89 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentY = mouseY;
 
     window.addEventListener("pointermove", (event) => {
+
       mouseX = event.clientX;
       mouseY = event.clientY;
+
+      document.documentElement.style.setProperty(
+        "--mouse-x",
+        `${mouseX}px`
+      );
+
+      document.documentElement.style.setProperty(
+        "--mouse-y",
+        `${mouseY}px`
+      );
+
     });
 
-    function animateGlow() {
+    function animateCursor() {
 
-      currentX += (mouseX - currentX) * 0.10;
-      currentY += (mouseY - currentY) * 0.10;
+      currentX += (mouseX - currentX) * 0.14;
+      currentY += (mouseY - currentY) * 0.14;
 
-      glow.style.left = `${currentX}px`;
-      glow.style.top = `${currentY}px`;
+      cursor.style.left = `${currentX}px`;
+      cursor.style.top = `${currentY}px`;
 
-      requestAnimationFrame(animateGlow);
+      requestAnimationFrame(animateCursor);
     }
 
-    animateGlow();
+    animateCursor();
+
+
+    /* =====================================================
+       CURSOR → BLOCK HIGHLIGHT
+       ===================================================== */
+
+    interactiveBlocks.forEach((block) => {
+
+      block.addEventListener("pointerenter", () => {
+
+        document.body.classList.add("cursor-hover");
+
+        cursor.style.width = "340px";
+        cursor.style.height = "340px";
+
+      });
+
+      block.addEventListener("pointerleave", () => {
+
+        document.body.classList.remove("cursor-hover");
+
+        cursor.style.width = "250px";
+        cursor.style.height = "250px";
+
+      });
+
+      block.addEventListener("pointermove", (event) => {
+
+        const rect = block.getBoundingClientRect();
+
+        const x =
+          ((event.clientX - rect.left) / rect.width) * 100;
+
+        const y =
+          ((event.clientY - rect.top) / rect.height) * 100;
+
+        block.style.setProperty(
+          "--card-x",
+          `${x}%`
+        );
+
+        block.style.setProperty(
+          "--card-y",
+          `${y}%`
+        );
+
+      });
+
+    });
   }
 
 
-  /* =======================================================
-     MOBILE MENU
-  ======================================================= */
+  /* =========================================================
+     NAVIGATION / MOBILE MENU
+     ========================================================= */
 
   const menu = document.querySelector(".menu");
   const nav = document.querySelector(".nav");
@@ -50,7 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     menu.addEventListener("click", () => {
 
-      const isOpen = nav.classList.contains("mobile-open");
+      const isOpen =
+        nav.classList.contains("mobile-open");
 
       if (isOpen) {
 
@@ -63,31 +127,37 @@ document.addEventListener("DOMContentLoaded", () => {
         nav.classList.add("mobile-open");
 
         nav.style.display = "flex";
+
         nav.style.position = "absolute";
+
         nav.style.top = "78px";
+
         nav.style.right = "0";
+
         nav.style.width = "230px";
 
         nav.style.flexDirection = "column";
+
         nav.style.alignItems = "flex-start";
 
         nav.style.padding = "25px";
 
         nav.style.gap = "20px";
 
-        nav.style.background = "rgba(15, 8, 10, 0.97)";
+        nav.style.background =
+          "rgba(15, 8, 10, 0.97)";
 
-        nav.style.border = "1px solid rgba(255,255,255,0.08)";
+        nav.style.border =
+          "1px solid rgba(255,255,255,0.08)";
 
-        nav.style.boxShadow = "0 25px 60px rgba(0,0,0,0.5)";
+        nav.style.boxShadow =
+          "0 25px 60px rgba(0,0,0,0.5)";
 
-        nav.style.backdropFilter = "blur(15px)";
+        nav.style.backdropFilter =
+          "blur(15px)";
       }
-
     });
 
-
-    /* Close menu after clicking link */
 
     nav.querySelectorAll("a").forEach((link) => {
 
@@ -104,8 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* Reset menu when resizing */
-
     window.addEventListener("resize", () => {
 
       if (window.innerWidth > 950) {
@@ -113,17 +181,29 @@ document.addEventListener("DOMContentLoaded", () => {
         nav.classList.remove("mobile-open");
 
         nav.style.display = "";
+
         nav.style.position = "";
+
         nav.style.top = "";
+
         nav.style.right = "";
+
         nav.style.width = "";
+
         nav.style.flexDirection = "";
+
         nav.style.alignItems = "";
+
         nav.style.padding = "";
+
         nav.style.gap = "";
+
         nav.style.background = "";
+
         nav.style.border = "";
+
         nav.style.boxShadow = "";
+
         nav.style.backdropFilter = "";
 
       }
@@ -133,35 +213,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================================
+  /* =========================================================
      SCROLL REVEAL
-  ======================================================= */
+     ========================================================= */
 
   const revealElements =
     document.querySelectorAll(".reveal");
 
   if ("IntersectionObserver" in window) {
 
-    const observer = new IntersectionObserver(
-      (entries) => {
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
 
-        entries.forEach((entry) => {
+          entries.forEach((entry) => {
 
-          if (entry.isIntersecting) {
+            if (entry.isIntersecting) {
 
-            entry.target.classList.add("visible");
+              entry.target.classList.add("visible");
 
-            observer.unobserve(entry.target);
+              observer.unobserve(entry.target);
 
-          }
+            }
 
-        });
+          });
 
-      },
-      {
-        threshold: 0.12
-      }
-    );
+        },
+        {
+          threshold: 0.12
+        }
+      );
 
     revealElements.forEach((element) => {
 
@@ -180,9 +261,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================================
-     STAGGERED REVEAL
-  ======================================================= */
+  /* =========================================================
+     STAGGERED CARD ANIMATION
+     ========================================================= */
 
   const groupedSections = [
     ".skill-card",
@@ -193,7 +274,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   groupedSections.forEach((selector) => {
 
-    const elements = document.querySelectorAll(selector);
+    const elements =
+      document.querySelectorAll(selector);
 
     elements.forEach((element, index) => {
 
@@ -205,9 +287,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* =======================================================
-     HERO PROFILE PHOTO — SUBTLE 3D TILT
-  ======================================================= */
+  /* =========================================================
+     PROFILE PHOTO 3D TILT
+     ========================================================= */
 
   const profileFrame =
     document.querySelector(".profile-frame");
@@ -221,48 +303,60 @@ document.addEventListener("DOMContentLoaded", () => {
     window.matchMedia("(pointer:fine)").matches
   ) {
 
-    profileFrame.addEventListener("pointermove", (event) => {
+    profileFrame.addEventListener(
+      "pointermove",
+      (event) => {
 
-      const rect =
-        profileFrame.getBoundingClientRect();
+        const rect =
+          profileFrame.getBoundingClientRect();
 
-      const x =
-        event.clientX - rect.left;
+        const x =
+          event.clientX - rect.left;
 
-      const y =
-        event.clientY - rect.top;
+        const y =
+          event.clientY - rect.top;
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+        const centerX =
+          rect.width / 2;
 
-      const rotateY =
-        ((x - centerX) / centerX) * 3;
+        const centerY =
+          rect.height / 2;
 
-      const rotateX =
-        ((y - centerY) / centerY) * -3;
+        const rotateY =
+          ((x - centerX) / centerX) * 3;
 
-      profilePhoto.style.transform =
-        `perspective(900px)
-         rotateX(${rotateX}deg)
-         rotateY(${rotateY}deg)
-         scale(1.015)`;
+        const rotateX =
+          ((y - centerY) / centerY) * -3;
 
-    });
+        profilePhoto.style.transform =
+          `perspective(900px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           scale(1.015)`;
+
+      }
+    );
 
 
-    profileFrame.addEventListener("pointerleave", () => {
+    profileFrame.addEventListener(
+      "pointerleave",
+      () => {
 
-      profilePhoto.style.transform =
-        "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
+        profilePhoto.style.transform =
+          "perspective(900px)
+           rotateX(0deg)
+           rotateY(0deg)
+           scale(1)";
 
-    });
+      }
+    );
 
   }
 
 
-  /* =======================================================
+  /* =========================================================
      SMOKE PARALLAX
-  ======================================================= */
+     ========================================================= */
 
   const smokeLayers =
     document.querySelectorAll(".smoke-layer");
@@ -272,66 +366,101 @@ document.addEventListener("DOMContentLoaded", () => {
     window.matchMedia("(pointer:fine)").matches
   ) {
 
-    window.addEventListener("pointermove", (event) => {
+    window.addEventListener(
+      "pointermove",
+      (event) => {
 
-      const x =
-        (event.clientX / window.innerWidth - 0.5);
+        const x =
+          event.clientX / window.innerWidth - 0.5;
 
-      const y =
-        (event.clientY / window.innerHeight - 0.5);
+        const y =
+          event.clientY / window.innerHeight - 0.5;
 
-      smokeLayers.forEach((layer, index) => {
+        smokeLayers.forEach((layer, index) => {
 
-        const strength =
-          (index + 1) * 8;
+          const strength =
+            (index + 1) * 8;
 
-        layer.style.marginLeft =
-          `${x * strength}px`;
+          layer.style.marginLeft =
+            `${x * strength}px`;
 
-        layer.style.marginTop =
-          `${y * strength}px`;
+          layer.style.marginTop =
+            `${y * strength}px`;
 
-      });
+        });
 
-    });
+      }
+    );
 
   }
 
 
-  /* =======================================================
-     ORBIT — VERY SUBTLE MOUSE MOVEMENT
-  ======================================================= */
+  /* =========================================================
+     ORBIT PARALLAX
+     ========================================================= */
 
   const orbit =
     document.querySelector(".orbit");
+
+  const orbitRing3 =
+    document.querySelector(".orbit-ring-3");
+
+  const orbitRing4 =
+    document.querySelector(".orbit-ring-4");
 
   if (
     orbit &&
     window.matchMedia("(pointer:fine)").matches
   ) {
 
-    window.addEventListener("pointermove", (event) => {
+    window.addEventListener(
+      "pointermove",
+      (event) => {
 
-      const x =
-        (event.clientX / window.innerWidth - 0.5);
+        const x =
+          event.clientX / window.innerWidth - 0.5;
 
-      const y =
-        (event.clientY / window.innerHeight - 0.5);
+        const y =
+          event.clientY / window.innerHeight - 0.5;
 
-      orbit.style.marginLeft =
-        `${x * 8}px`;
 
-      orbit.style.marginTop =
-        `${y * 8}px`;
+        orbit.style.marginLeft =
+          `${x * 10}px`;
 
-    });
+        orbit.style.marginTop =
+          `${y * 10}px`;
+
+
+        if (orbitRing3) {
+
+          orbitRing3.style.marginLeft =
+            `${x * -7}px`;
+
+          orbitRing3.style.marginTop =
+            `${y * -7}px`;
+
+        }
+
+
+        if (orbitRing4) {
+
+          orbitRing4.style.marginLeft =
+            `${x * 12}px`;
+
+          orbitRing4.style.marginTop =
+            `${y * 12}px`;
+
+        }
+
+      }
+    );
 
   }
 
 
-  /* =======================================================
-     MUN CARD TILT
-  ======================================================= */
+  /* =========================================================
+     MUN CARD 3D TILT
+     ========================================================= */
 
   const munCards =
     document.querySelectorAll(".mun-card");
@@ -343,92 +472,111 @@ document.addEventListener("DOMContentLoaded", () => {
 
     munCards.forEach((card) => {
 
-      card.addEventListener("pointermove", (event) => {
+      card.addEventListener(
+        "pointermove",
+        (event) => {
 
-        const rect =
-          card.getBoundingClientRect();
+          const rect =
+            card.getBoundingClientRect();
 
-        const x =
-          event.clientX - rect.left;
+          const x =
+            event.clientX - rect.left;
 
-        const y =
-          event.clientY - rect.top;
+          const y =
+            event.clientY - rect.top;
 
-        const rotateY =
-          ((x - rect.width / 2) /
-            rect.width) * 2;
+          const rotateY =
+            ((x - rect.width / 2) /
+              rect.width) * 2.5;
 
-        const rotateX =
-          ((y - rect.height / 2) /
-            rect.height) * -2;
+          const rotateX =
+            ((y - rect.height / 2) /
+              rect.height) * -2.5;
 
-        card.style.transform =
-          `perspective(1000px)
-           rotateX(${rotateX}deg)
-           rotateY(${rotateY}deg)
-           translateY(-5px)`;
+          card.style.transform =
+            `perspective(1000px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)
+             translateY(-5px)`;
 
-      });
+        }
+      );
 
 
-      card.addEventListener("pointerleave", () => {
+      card.addEventListener(
+        "pointerleave",
+        () => {
 
-        card.style.transform = "";
+          card.style.transform = "";
 
-      });
+        }
+      );
 
     });
 
   }
 
 
-  /* =======================================================
-     SKILL CARD HOVER
-  ======================================================= */
+  /* =========================================================
+     SKILL CARD
+     ========================================================= */
 
   const skillCards =
     document.querySelectorAll(".skill-card");
 
   skillCards.forEach((card) => {
 
-    card.addEventListener("mouseenter", () => {
+    card.addEventListener(
+      "mouseenter",
+      () => {
 
-      const number =
-        card.querySelector(".skill-number");
+        const number =
+          card.querySelector(".skill-number");
 
-      if (number) {
-        number.style.color =
-          "rgba(169, 74, 91, 0.30)";
+        if (number) {
+
+          number.style.color =
+            "rgba(169, 74, 91, 0.30)";
+
+        }
+
       }
+    );
 
-    });
 
+    card.addEventListener(
+      "mouseleave",
+      () => {
 
-    card.addEventListener("mouseleave", () => {
+        const number =
+          card.querySelector(".skill-number");
 
-      const number =
-        card.querySelector(".skill-number");
+        if (number) {
 
-      if (number) {
-        number.style.color =
-          "rgba(255,255,255,0.12)";
+          number.style.color =
+            "rgba(255,255,255,0.12)";
+
+        }
+
       }
-
-    });
+    );
 
   });
 
 
-  /* =======================================================
-     ACHIEVEMENT PHOTO HOVER
-  ======================================================= */
+  /* =========================================================
+     ACHIEVEMENT PHOTO
+     ========================================================= */
 
   const achievementPhoto =
     document.querySelector(
       ".achievement-photo-inner"
     );
 
-  if (achievementPhoto) {
+  if (
+    achievementPhoto &&
+    window.matchMedia("(pointer:fine)").matches
+  ) {
 
     achievementPhoto.addEventListener(
       "mousemove",
@@ -469,9 +617,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================================
+  /* =========================================================
      CERTIFICATE LINKS
-  ======================================================= */
+     ========================================================= */
 
   const certificateLinks =
     document.querySelectorAll(
@@ -480,33 +628,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   certificateLinks.forEach((link) => {
 
-    link.addEventListener("click", (event) => {
+    link.addEventListener(
+      "click",
+      (event) => {
 
-      const href =
-        link.getAttribute("href");
+        const href =
+          link.getAttribute("href");
 
-      if (
-        !href ||
-        href === "#" ||
-        href.trim() === ""
-      ) {
+        if (
+          !href ||
+          href === "#" ||
+          href.trim() === ""
+        ) {
 
-        event.preventDefault();
+          event.preventDefault();
 
-        alert(
-          "Certificate will be available here."
-        );
+          alert(
+            "Certificate will be available here."
+          );
+
+        }
 
       }
-
-    });
+    );
 
   });
 
 
-  /* =======================================================
-     MAGNET EFFECT ON BUTTONS
-  ======================================================= */
+  /* =========================================================
+     MAGNETIC BUTTON EFFECT
+     ========================================================= */
 
   const magneticElements =
     document.querySelectorAll(
@@ -538,8 +689,10 @@ document.addEventListener("DOMContentLoaded", () => {
             rect.height / 2;
 
           element.style.transform =
-            `translate(${x * 0.08}px,
-                        ${y * 0.08}px)`;
+            `translate(
+              ${x * 0.08}px,
+              ${y * 0.08}px
+            )`;
 
         }
       );
@@ -559,9 +712,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================================
+  /* =========================================================
      ACTIVE NAVIGATION
-  ======================================================= */
+     ========================================================= */
 
   const sections =
     document.querySelectorAll(
@@ -569,11 +722,12 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
   const navLinks =
-    document.querySelectorAll(
-      ".nav a"
-    );
+    document.querySelectorAll(".nav a");
 
-  if (sections.length && navLinks.length) {
+  if (
+    sections.length &&
+    navLinks.length
+  ) {
 
     const sectionObserver =
       new IntersectionObserver(
@@ -607,7 +761,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         },
         {
-          rootMargin: "-35% 0px -55% 0px"
+          rootMargin:
+            "-35% 0px -55% 0px"
         }
       );
 
@@ -620,9 +775,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================================
-     ESCAPE KEY — CLOSE MENU
-  ======================================================= */
+  /* =========================================================
+     ESCAPE → CLOSE MENU
+     ========================================================= */
 
   document.addEventListener(
     "keydown",
@@ -635,7 +790,9 @@ document.addEventListener("DOMContentLoaded", () => {
           nav.classList.contains("mobile-open")
         ) {
 
-          nav.classList.remove("mobile-open");
+          nav.classList.remove(
+            "mobile-open"
+          );
 
           nav.style.display = "";
 
@@ -647,9 +804,9 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
 
-  /* =======================================================
-     IMAGE LOAD FADE
-  ======================================================= */
+  /* =========================================================
+     IMAGE LOADING
+     ========================================================= */
 
   const images =
     document.querySelectorAll("img");
@@ -665,7 +822,9 @@ document.addEventListener("DOMContentLoaded", () => {
       image.addEventListener(
         "load",
         () => {
+
           image.classList.add("loaded");
+
         }
       );
 
@@ -674,51 +833,51 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* =======================================================
+  /* =========================================================
      SMOOTH ANCHOR SCROLL
-  ======================================================= */
+     ========================================================= */
 
-  document.querySelectorAll(
-    'a[href^="#"]'
-  ).forEach((link) => {
+  document
+    .querySelectorAll('a[href^="#"]')
+    .forEach((link) => {
 
-    link.addEventListener(
-      "click",
-      (event) => {
+      link.addEventListener(
+        "click",
+        (event) => {
 
-        const targetId =
-          link.getAttribute("href");
+          const targetId =
+            link.getAttribute("href");
 
-        if (
-          !targetId ||
-          targetId === "#"
-        ) {
-          return;
+          if (
+            !targetId ||
+            targetId === "#"
+          ) {
+            return;
+          }
+
+          const target =
+            document.querySelector(targetId);
+
+          if (!target) {
+            return;
+          }
+
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
         }
+      );
 
-        const target =
-          document.querySelector(targetId);
-
-        if (!target) {
-          return;
-        }
-
-        event.preventDefault();
-
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }
-    );
-
-  });
+    });
 
 
-  /* =======================================================
+  /* =========================================================
      REDUCED MOTION
-  ======================================================= */
+     ========================================================= */
 
   if (
     window.matchMedia(
@@ -737,10 +896,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================================
+  /* =========================================================
      PAGE READY
-  ======================================================= */
+     ========================================================= */
 
-  document.body.classList.add("page-ready");
+  document.body.classList.add(
+    "page-ready"
+  );
 
 });
