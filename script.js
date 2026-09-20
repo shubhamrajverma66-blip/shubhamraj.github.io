@@ -1,68 +1,112 @@
 /* =========================================================
-   SHUBHAM RAJ — PREMIUM INTERACTIONS
+   SHUBHAM RAJ — PORTFOLIO INTERACTIONS
 ========================================================= */
 
 
 /* =========================================================
-   CURSOR GLOW
+   1. CURSOR GLOW
 ========================================================= */
 
-const glow = document.querySelector('.cursor-glow');
+const cursorGlow = document.querySelector('.cursor-glow');
 
-if (glow) {
+if (cursorGlow) {
+
+  let mouseX = 0;
+  let mouseY = 0;
+
+  let glowX = 0;
+  let glowY = 0;
+
   window.addEventListener('pointermove', (e) => {
-    glow.style.left = `${e.clientX}px`;
-    glow.style.top = `${e.clientY}px`;
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
   });
+
+  function animateCursor() {
+
+    glowX += (mouseX - glowX) * 0.16;
+    glowY += (mouseY - glowY) * 0.16;
+
+    cursorGlow.style.left = `${glowX}px`;
+    cursorGlow.style.top = `${glowY}px`;
+
+    requestAnimationFrame(animateCursor);
+
+  }
+
+  animateCursor();
 }
 
 
 /* =========================================================
-   CURSOR — DIFFERENT EFFECT FOR DIFFERENT AREAS
+   2. DIFFERENT CURSOR EFFECTS
 ========================================================= */
 
-const interactiveAreas = [
-  {
-    selector: '.profile-photo',
-    className: 'cursor-photo'
-  },
-  {
-    selector: '#achievements, .achievement-item, .achievement-photo-box',
-    className: 'cursor-achievement'
-  },
-  {
-    selector: '#experience, .timeline-item',
-    className: 'cursor-experience'
-  },
-  {
-    selector: '#skills, .skill-card',
-    className: 'cursor-skills'
-  }
-];
+function addCursorEffect(selector, className) {
 
-interactiveAreas.forEach((area) => {
-
-  document.querySelectorAll(area.selector).forEach((element) => {
+  document.querySelectorAll(selector).forEach((element) => {
 
     element.addEventListener('mouseenter', () => {
-      document.body.classList.add(area.className);
+
+      document.body.classList.add(className);
+
     });
 
     element.addEventListener('mouseleave', () => {
-      document.body.classList.remove(area.className);
+
+      document.body.classList.remove(className);
+
     });
 
   });
 
-});
+}
+
+
+/* Profile photo */
+
+addCursorEffect(
+  '.profile-photo',
+  'cursor-photo'
+);
+
+
+/* Achievements */
+
+addCursorEffect(
+  '#achievements, .achievement-item, .achievement-photo-box',
+  'cursor-achievement'
+);
+
+
+/* Experience */
+
+addCursorEffect(
+  '#experience, .timeline-item',
+  'cursor-experience'
+);
+
+
+/* Skills */
+
+addCursorEffect(
+  '#skills, .skill-card',
+  'cursor-skills'
+);
 
 
 /* =========================================================
-   PHOTO 3D TILT
+   3. PROFILE PHOTO — SUBTLE 3D TILT
 ========================================================= */
 
-const profilePhoto = document.querySelector('.profile-photo');
-const heroMark = document.querySelector('.hero-mark');
+const profilePhoto =
+  document.querySelector('.profile-photo');
+
+const heroMark =
+  document.querySelector('.hero-mark');
+
 
 if (
   profilePhoto &&
@@ -70,42 +114,55 @@ if (
   window.innerWidth > 800
 ) {
 
-  heroMark.addEventListener('mousemove', (e) => {
+  heroMark.addEventListener(
+    'mousemove',
+    (e) => {
 
-    const rect = heroMark.getBoundingClientRect();
+      const rect =
+        heroMark.getBoundingClientRect();
 
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+      const x =
+        e.clientX - rect.left;
 
-    const rotateY =
-      ((x / rect.width) - 0.5) * 8;
+      const y =
+        e.clientY - rect.top;
 
-    const rotateX =
-      ((y / rect.height) - 0.5) * -8;
 
-    profilePhoto.style.transform =
-      `perspective(1000px)
-       rotateX(${rotateX}deg)
-       rotateY(${rotateY}deg)
-       scale(1.025)`;
+      const rotateY =
+        ((x / rect.width) - 0.5) * 4;
 
-  });
+      const rotateX =
+        ((y / rect.height) - 0.5) * -4;
 
-  heroMark.addEventListener('mouseleave', () => {
 
-    profilePhoto.style.transform =
-      `perspective(1000px)
-       rotateX(0deg)
-       rotateY(0deg)
-       scale(1)`;
+      profilePhoto.style.transform =
+        `perspective(1000px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)
+         scale(1.012)`;
 
-  });
+    }
+  );
+
+
+  heroMark.addEventListener(
+    'mouseleave',
+    () => {
+
+      profilePhoto.style.transform =
+        `perspective(1000px)
+         rotateX(0deg)
+         rotateY(0deg)
+         scale(1)`;
+
+    }
+  );
 
 }
 
 
 /* =========================================================
-   SMOKE PARALLAX
+   4. SMOKE — VERY SUBTLE MOUSE PARALLAX
 ========================================================= */
 
 const smokeLayer =
@@ -113,25 +170,36 @@ const smokeLayer =
 
 if (smokeLayer) {
 
-  window.addEventListener('pointermove', (e) => {
+  window.addEventListener(
+    'pointermove',
+    (e) => {
 
-    const x =
-      (e.clientX / window.innerWidth - 0.5) * 20;
+      const x =
+        (e.clientX / window.innerWidth - 0.5) * 12;
 
-    const y =
-      (e.clientY / window.innerHeight - 0.5) * 20;
+      const y =
+        (e.clientY / window.innerHeight - 0.5) * 12;
 
-    smokeLayer.style.marginLeft = `${x}px`;
-    smokeLayer.style.marginTop = `${y}px`;
 
-  });
+      smokeLayer.style.marginLeft =
+        `${x}px`;
+
+      smokeLayer.style.marginTop =
+        `${y}px`;
+
+    }
+  );
 
 }
 
 
 /* =========================================================
-   SCROLL REVEAL
+   5. SCROLL REVEAL
 ========================================================= */
+
+const revealElements =
+  document.querySelectorAll('.reveal');
+
 
 const revealObserver =
   new IntersectionObserver(
@@ -141,9 +209,13 @@ const revealObserver =
 
         if (entry.isIntersecting) {
 
-          entry.target.classList.add('visible');
+          entry.target.classList.add(
+            'visible'
+          );
 
-          revealObserver.unobserve(entry.target);
+          revealObserver.unobserve(
+            entry.target
+          );
 
         }
 
@@ -155,17 +227,16 @@ const revealObserver =
     }
   );
 
-document
-  .querySelectorAll('.reveal')
-  .forEach((element) => {
 
-    revealObserver.observe(element);
+revealElements.forEach((element) => {
 
-  });
+  revealObserver.observe(element);
+
+});
 
 
 /* =========================================================
-   MOBILE MENU
+   6. MOBILE MENU
 ========================================================= */
 
 const menu =
@@ -174,54 +245,80 @@ const menu =
 const nav =
   document.querySelector('.nav nav');
 
+
 if (menu && nav) {
 
-  menu.addEventListener('click', () => {
+  menu.addEventListener(
+    'click',
+    () => {
 
-    const open =
-      nav.classList.toggle('mobile-open');
+      const isOpen =
+        nav.classList.toggle(
+          'mobile-open'
+        );
 
-    if (open) {
 
-      nav.style.display = 'flex';
-      nav.style.position = 'absolute';
-      nav.style.top = '68px';
-      nav.style.right = '6vw';
-      nav.style.flexDirection = 'column';
-      nav.style.alignItems = 'flex-start';
+      if (isOpen) {
 
-      nav.style.background = '#10090b';
-      nav.style.padding = '22px';
+        nav.style.display = 'flex';
 
-      nav.style.gap = '18px';
+        nav.style.position =
+          'absolute';
 
-      nav.style.border =
-        '1px solid rgba(255,255,255,.08)';
+        nav.style.top =
+          '68px';
 
-      nav.style.boxShadow =
-        '0 25px 60px rgba(0,0,0,.5)';
+        nav.style.right =
+          '6vw';
 
-    } else {
+        nav.style.flexDirection =
+          'column';
 
-      nav.style.display = '';
+        nav.style.alignItems =
+          'flex-start';
+
+        nav.style.background =
+          '#10090b';
+
+        nav.style.padding =
+          '20px';
+
+        nav.style.gap =
+          '18px';
+
+        nav.style.border =
+          '1px solid rgba(255,255,255,.08)';
+
+        nav.style.boxShadow =
+          '0 20px 50px rgba(0,0,0,.5)';
+
+      } else {
+
+        nav.style.display = '';
+
+      }
 
     }
+  );
 
-  });
 
+  /* Close menu after clicking a link */
 
   nav.querySelectorAll('a')
     .forEach((link) => {
 
-      link.addEventListener('click', () => {
+      link.addEventListener(
+        'click',
+        () => {
 
-        nav.classList.remove(
-          'mobile-open'
-        );
+          nav.classList.remove(
+            'mobile-open'
+          );
 
-        nav.style.display = '';
+          nav.style.display = '';
 
-      });
+        }
+      );
 
     });
 
@@ -229,7 +326,7 @@ if (menu && nav) {
 
 
 /* =========================================================
-   ACTIVE NAVIGATION
+   7. ACTIVE NAVIGATION
 ========================================================= */
 
 const sections =
@@ -242,63 +339,88 @@ const navLinks =
     '.nav nav a'
   );
 
-const sectionObserver =
-  new IntersectionObserver(
-    (entries) => {
 
-      entries.forEach((entry) => {
+if (
+  sections.length &&
+  navLinks.length
+) {
 
-        if (entry.isIntersecting) {
+  const sectionObserver =
+    new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (!entry.isIntersecting) {
+            return;
+          }
+
 
           navLinks.forEach((link) => {
-            link.classList.remove('active');
+
+            link.classList.remove(
+              'active'
+            );
+
           });
+
 
           const activeLink =
             document.querySelector(
               `.nav nav a[href="#${entry.target.id}"]`
             );
 
-          activeLink?.classList.add('active');
 
-        }
+          if (activeLink) {
 
-      });
+            activeLink.classList.add(
+              'active'
+            );
 
-    },
-    {
-      threshold:.35
-    }
-  );
+          }
 
-sections.forEach((section) => {
+        });
 
-  sectionObserver.observe(section);
+      },
+      {
+        threshold:0.35
+      }
+    );
 
-});
+
+  sections.forEach((section) => {
+
+    sectionObserver.observe(section);
+
+  });
+
+}
 
 
 /* =========================================================
-   INTERNSHIP CERTIFICATE SYSTEM
+   8. INTERNSHIP CERTIFICATE LINKS
 ========================================================= */
 
 /*
-  IMPORTANT:
+   IMPORTANT:
 
-  Baad me certificates upload karne ke baad
-  HTML me certificate-link ke href ko simply
-  certificate filename se replace kar dena.
+   Abhi certificate upload nahi kiya hai,
+   isliye existing links ko disturb nahi karenge.
 
-  Example:
+   Baad mein HTML mein:
 
-  href="certificate-bijay-mohan-goswami.jpg"
+   href="#"
 
-  Ya agar PDF hai:
+   ko certificate file ke naam se replace karna:
 
-  href="certificate-bijay-mohan-goswami.pdf"
+   href="certificate-bijay-mohan.jpg"
 
-  target="_blank" ki wajah se certificate
-  new tab me open hoga.
+   ya:
+
+   href="certificate-bijay-mohan.pdf"
+
+   target="_blank" hone par certificate
+   new tab mein open hoga.
 */
 
 
@@ -306,37 +428,43 @@ document
   .querySelectorAll('.certificate-link')
   .forEach((link) => {
 
-    link.addEventListener('click', (event) => {
+    link.addEventListener(
+      'click',
+      (event) => {
 
-      const certificate =
-        link.getAttribute('href');
+        const href =
+          link.getAttribute('href');
 
-      if (
-        !certificate ||
-        certificate === '#' ||
-        certificate === ''
-      ) {
 
-        event.preventDefault();
+        /* Agar certificate abhi upload nahi hua */
 
-        alert(
-          'Certificate upload karne ke baad yahan click karke certificate open hoga.'
-        );
+        if (
+          !href ||
+          href === '#' ||
+          href.trim() === ''
+        ) {
+
+          event.preventDefault();
+
+          alert(
+            'Certificate upload karne ke baad yahan click karke certificate open hoga.'
+          );
+
+        }
 
       }
-
-    });
+    );
 
   });
 
 
 /* =========================================================
-   HOVER MAGNETIC EFFECT
+   9. SUBTLE BUTTON MAGNET EFFECT
 ========================================================= */
 
 document
   .querySelectorAll(
-    '.contact-link, .certificate-link'
+    '.certificate-link, .contact-link'
   )
   .forEach((element) => {
 
@@ -347,24 +475,34 @@ document
         const rect =
           element.getBoundingClientRect();
 
+
         const x =
-          e.clientX - rect.left - rect.width / 2;
+          e.clientX -
+          rect.left -
+          rect.width / 2;
+
 
         const y =
-          e.clientY - rect.top - rect.height / 2;
+          e.clientY -
+          rect.top -
+          rect.height / 2;
+
 
         element.style.transform =
-          `translate(${x * .06}px, ${y * .06}px)`;
+          `translate(
+            ${x * 0.035}px,
+            ${y * 0.035}px
+          )`;
 
       }
     );
+
 
     element.addEventListener(
       'mouseleave',
       () => {
 
-        element.style.transform =
-          '';
+        element.style.transform = '';
 
       }
     );
@@ -373,58 +511,224 @@ document
 
 
 /* =========================================================
-   SECTION ENTRY EFFECT
+   10. INTERNSHIP CARD HOVER
 ========================================================= */
 
-const allSections =
-  document.querySelectorAll(
-    'main section'
-  );
+document
+  .querySelectorAll('.timeline-item')
+  .forEach((card) => {
 
-allSections.forEach((section) => {
+    card.addEventListener(
+      'mouseenter',
+      () => {
 
-  section.addEventListener(
-    'mouseenter',
-    () => {
+        card.style.zIndex = '5';
 
-      section.classList.add(
-        'section-active'
-      );
+      }
+    );
 
-    }
-  );
 
-  section.addEventListener(
-    'mouseleave',
-    () => {
+    card.addEventListener(
+      'mouseleave',
+      () => {
 
-      section.classList.remove(
-        'section-active'
-      );
+        card.style.zIndex = '';
 
-    }
-  );
+      }
+    );
 
-});
+  });
 
 
 /* =========================================================
-   REDUCE MOTION FOR ACCESSIBILITY
+   11. MUN CARD SUBTLE INTERACTION
 ========================================================= */
 
-const prefersReducedMotion =
+document
+  .querySelectorAll('.mun-card')
+  .forEach((card) => {
+
+    card.addEventListener(
+      'mousemove',
+      (e) => {
+
+        if (window.innerWidth <= 800) {
+          return;
+        }
+
+
+        const rect =
+          card.getBoundingClientRect();
+
+
+        const x =
+          (e.clientX - rect.left) /
+          rect.width -
+          0.5;
+
+
+        const y =
+          (e.clientY - rect.top) /
+          rect.height -
+          0.5;
+
+
+        card.style.transform =
+          `translateY(-4px)
+           rotateX(${y * -2}deg)
+           rotateY(${x * 2}deg)`;
+
+      }
+    );
+
+
+    card.addEventListener(
+      'mouseleave',
+      () => {
+
+        card.style.transform = '';
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   12. SKILL CARD INTERACTION
+========================================================= */
+
+document
+  .querySelectorAll('.skill-card')
+  .forEach((card) => {
+
+    card.addEventListener(
+      'mouseenter',
+      () => {
+
+        card.style.zIndex = '5';
+
+      }
+    );
+
+
+    card.addEventListener(
+      'mouseleave',
+      () => {
+
+        card.style.zIndex = '';
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   13. ACHIEVEMENT PHOTO HOVER
+========================================================= */
+
+const achievementPhoto =
+  document.querySelector(
+    '.achievement-photo-box'
+  );
+
+
+if (achievementPhoto) {
+
+  achievementPhoto.addEventListener(
+    'mousemove',
+    (e) => {
+
+      if (window.innerWidth <= 800) {
+        return;
+      }
+
+
+      const rect =
+        achievementPhoto.getBoundingClientRect();
+
+
+      const x =
+        (e.clientX - rect.left) /
+        rect.width -
+        0.5;
+
+
+      const y =
+        (e.clientY - rect.top) /
+        rect.height -
+        0.5;
+
+
+      achievementPhoto.style.transform =
+        `perspective(900px)
+         rotateX(${y * -1.5}deg)
+         rotateY(${x * 1.5}deg)`;
+
+    }
+  );
+
+
+  achievementPhoto.addEventListener(
+    'mouseleave',
+    () => {
+
+      achievementPhoto.style.transform =
+        '';
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   14. ESC KEY — CLOSE MOBILE MENU
+========================================================= */
+
+document.addEventListener(
+  'keydown',
+  (e) => {
+
+    if (
+      e.key === 'Escape' &&
+      nav
+    ) {
+
+      nav.classList.remove(
+        'mobile-open'
+      );
+
+      nav.style.display = '';
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   15. REDUCED MOTION
+========================================================= */
+
+const reducedMotion =
   window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   );
 
-if (prefersReducedMotion.matches) {
+
+if (reducedMotion.matches) {
 
   document
     .querySelectorAll('*')
     .forEach((element) => {
 
-      element.style.animationDuration = '0.01ms';
-      element.style.transitionDuration = '0.01ms';
+      element.style.animationDuration =
+        '0.01ms';
+
+      element.style.transitionDuration =
+        '0.01ms';
 
     });
 
