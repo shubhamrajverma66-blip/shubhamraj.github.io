@@ -1,381 +1,157 @@
 /* =========================================================
-   SHUBHAM RAJ — PORTFOLIO INTERACTIONS
+   SHUBHAM RAJ PORTFOLIO
+   INTERACTIVE JAVASCRIPT
 ========================================================= */
 
+document.addEventListener("DOMContentLoaded", () => {
 
-/* =========================================================
-   1. CURSOR GLOW
-========================================================= */
+  /* =======================================================
+     CURSOR GLOW
+  ======================================================= */
 
-const cursorGlow = document.querySelector('.cursor-glow');
+  const glow = document.querySelector(".cursor-glow");
 
-if (cursorGlow) {
+  if (glow) {
 
-  let mouseX = 0;
-  let mouseY = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
 
-  let glowX = 0;
-  let glowY = 0;
+    let currentX = mouseX;
+    let currentY = mouseY;
 
-  window.addEventListener('pointermove', (e) => {
+    window.addEventListener("pointermove", (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+    });
 
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    function animateGlow() {
 
-  });
+      currentX += (mouseX - currentX) * 0.10;
+      currentY += (mouseY - currentY) * 0.10;
 
-  function animateCursor() {
+      glow.style.left = `${currentX}px`;
+      glow.style.top = `${currentY}px`;
 
-    glowX += (mouseX - glowX) * 0.16;
-    glowY += (mouseY - glowY) * 0.16;
+      requestAnimationFrame(animateGlow);
+    }
 
-    cursorGlow.style.left = `${glowX}px`;
-    cursorGlow.style.top = `${glowY}px`;
-
-    requestAnimationFrame(animateCursor);
-
+    animateGlow();
   }
 
-  animateCursor();
-}
 
+  /* =======================================================
+     MOBILE MENU
+  ======================================================= */
 
-/* =========================================================
-   2. DIFFERENT CURSOR EFFECTS
-========================================================= */
+  const menu = document.querySelector(".menu");
+  const nav = document.querySelector(".nav");
 
-function addCursorEffect(selector, className) {
+  if (menu && nav) {
 
-  document.querySelectorAll(selector).forEach((element) => {
+    menu.addEventListener("click", () => {
 
-    element.addEventListener('mouseenter', () => {
+      const isOpen = nav.classList.contains("mobile-open");
 
-      document.body.classList.add(className);
+      if (isOpen) {
+
+        nav.classList.remove("mobile-open");
+
+        nav.style.display = "";
+
+      } else {
+
+        nav.classList.add("mobile-open");
+
+        nav.style.display = "flex";
+        nav.style.position = "absolute";
+        nav.style.top = "78px";
+        nav.style.right = "0";
+        nav.style.width = "230px";
+
+        nav.style.flexDirection = "column";
+        nav.style.alignItems = "flex-start";
+
+        nav.style.padding = "25px";
+
+        nav.style.gap = "20px";
+
+        nav.style.background = "rgba(15, 8, 10, 0.97)";
+
+        nav.style.border = "1px solid rgba(255,255,255,0.08)";
+
+        nav.style.boxShadow = "0 25px 60px rgba(0,0,0,0.5)";
+
+        nav.style.backdropFilter = "blur(15px)";
+      }
 
     });
 
-    element.addEventListener('mouseleave', () => {
 
-      document.body.classList.remove(className);
+    /* Close menu after clicking link */
 
-    });
+    nav.querySelectorAll("a").forEach((link) => {
 
-  });
+      link.addEventListener("click", () => {
 
-}
+        nav.classList.remove("mobile-open");
 
-
-/* Profile photo */
-
-addCursorEffect(
-  '.profile-photo',
-  'cursor-photo'
-);
-
-
-/* Achievements */
-
-addCursorEffect(
-  '#achievements, .achievement-item, .achievement-photo-box',
-  'cursor-achievement'
-);
-
-
-/* Experience */
-
-addCursorEffect(
-  '#experience, .timeline-item',
-  'cursor-experience'
-);
-
-
-/* Skills */
-
-addCursorEffect(
-  '#skills, .skill-card',
-  'cursor-skills'
-);
-
-
-/* =========================================================
-   3. PROFILE PHOTO — SUBTLE 3D TILT
-========================================================= */
-
-const profilePhoto =
-  document.querySelector('.profile-photo');
-
-const heroMark =
-  document.querySelector('.hero-mark');
-
-
-if (
-  profilePhoto &&
-  heroMark &&
-  window.innerWidth > 800
-) {
-
-  heroMark.addEventListener(
-    'mousemove',
-    (e) => {
-
-      const rect =
-        heroMark.getBoundingClientRect();
-
-      const x =
-        e.clientX - rect.left;
-
-      const y =
-        e.clientY - rect.top;
-
-
-      const rotateY =
-        ((x / rect.width) - 0.5) * 4;
-
-      const rotateX =
-        ((y / rect.height) - 0.5) * -4;
-
-
-      profilePhoto.style.transform =
-        `perspective(1000px)
-         rotateX(${rotateX}deg)
-         rotateY(${rotateY}deg)
-         scale(1.012)`;
-
-    }
-  );
-
-
-  heroMark.addEventListener(
-    'mouseleave',
-    () => {
-
-      profilePhoto.style.transform =
-        `perspective(1000px)
-         rotateX(0deg)
-         rotateY(0deg)
-         scale(1)`;
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   4. SMOKE — VERY SUBTLE MOUSE PARALLAX
-========================================================= */
-
-const smokeLayer =
-  document.querySelector('.smoke-layer');
-
-if (smokeLayer) {
-
-  window.addEventListener(
-    'pointermove',
-    (e) => {
-
-      const x =
-        (e.clientX / window.innerWidth - 0.5) * 12;
-
-      const y =
-        (e.clientY / window.innerHeight - 0.5) * 12;
-
-
-      smokeLayer.style.marginLeft =
-        `${x}px`;
-
-      smokeLayer.style.marginTop =
-        `${y}px`;
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   5. SCROLL REVEAL
-========================================================= */
-
-const revealElements =
-  document.querySelectorAll('.reveal');
-
-
-const revealObserver =
-  new IntersectionObserver(
-    (entries) => {
-
-      entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-          entry.target.classList.add(
-            'visible'
-          );
-
-          revealObserver.unobserve(
-            entry.target
-          );
-
+        if (window.innerWidth <= 950) {
+          nav.style.display = "";
         }
 
       });
 
-    },
-    {
-      threshold:0.12
-    }
-  );
+    });
 
 
-revealElements.forEach((element) => {
+    /* Reset menu when resizing */
 
-  revealObserver.observe(element);
+    window.addEventListener("resize", () => {
 
-});
+      if (window.innerWidth > 950) {
 
+        nav.classList.remove("mobile-open");
 
-/* =========================================================
-   6. MOBILE MENU
-========================================================= */
-
-const menu =
-  document.querySelector('.menu');
-
-const nav =
-  document.querySelector('.nav nav');
-
-
-if (menu && nav) {
-
-  menu.addEventListener(
-    'click',
-    () => {
-
-      const isOpen =
-        nav.classList.toggle(
-          'mobile-open'
-        );
-
-
-      if (isOpen) {
-
-        nav.style.display = 'flex';
-
-        nav.style.position =
-          'absolute';
-
-        nav.style.top =
-          '68px';
-
-        nav.style.right =
-          '6vw';
-
-        nav.style.flexDirection =
-          'column';
-
-        nav.style.alignItems =
-          'flex-start';
-
-        nav.style.background =
-          '#10090b';
-
-        nav.style.padding =
-          '20px';
-
-        nav.style.gap =
-          '18px';
-
-        nav.style.border =
-          '1px solid rgba(255,255,255,.08)';
-
-        nav.style.boxShadow =
-          '0 20px 50px rgba(0,0,0,.5)';
-
-      } else {
-
-        nav.style.display = '';
+        nav.style.display = "";
+        nav.style.position = "";
+        nav.style.top = "";
+        nav.style.right = "";
+        nav.style.width = "";
+        nav.style.flexDirection = "";
+        nav.style.alignItems = "";
+        nav.style.padding = "";
+        nav.style.gap = "";
+        nav.style.background = "";
+        nav.style.border = "";
+        nav.style.boxShadow = "";
+        nav.style.backdropFilter = "";
 
       }
 
-    }
-  );
-
-
-  /* Close menu after clicking a link */
-
-  nav.querySelectorAll('a')
-    .forEach((link) => {
-
-      link.addEventListener(
-        'click',
-        () => {
-
-          nav.classList.remove(
-            'mobile-open'
-          );
-
-          nav.style.display = '';
-
-        }
-      );
-
     });
 
-}
+  }
 
 
-/* =========================================================
-   7. ACTIVE NAVIGATION
-========================================================= */
+  /* =======================================================
+     SCROLL REVEAL
+  ======================================================= */
 
-const sections =
-  document.querySelectorAll(
-    'main section[id]'
-  );
+  const revealElements =
+    document.querySelectorAll(".reveal");
 
-const navLinks =
-  document.querySelectorAll(
-    '.nav nav a'
-  );
+  if ("IntersectionObserver" in window) {
 
-
-if (
-  sections.length &&
-  navLinks.length
-) {
-
-  const sectionObserver =
-    new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
 
         entries.forEach((entry) => {
 
-          if (!entry.isIntersecting) {
-            return;
-          }
+          if (entry.isIntersecting) {
 
+            entry.target.classList.add("visible");
 
-          navLinks.forEach((link) => {
-
-            link.classList.remove(
-              'active'
-            );
-
-          });
-
-
-          const activeLink =
-            document.querySelector(
-              `.nav nav a[href="#${entry.target.id}"]`
-            );
-
-
-          if (activeLink) {
-
-            activeLink.classList.add(
-              'active'
-            );
+            observer.unobserve(entry.target);
 
           }
 
@@ -383,353 +159,588 @@ if (
 
       },
       {
-        threshold:0.35
+        threshold: 0.12
       }
     );
 
+    revealElements.forEach((element) => {
 
-  sections.forEach((section) => {
+      observer.observe(element);
 
-    sectionObserver.observe(section);
+    });
 
-  });
+  } else {
 
-}
+    revealElements.forEach((element) => {
 
+      element.classList.add("visible");
 
-/* =========================================================
-   8. INTERNSHIP CERTIFICATE LINKS
-========================================================= */
+    });
 
-/*
-   IMPORTANT:
-
-   Abhi certificate upload nahi kiya hai,
-   isliye existing links ko disturb nahi karenge.
-
-   Baad mein HTML mein:
-
-   href="#"
-
-   ko certificate file ke naam se replace karna:
-
-   href="certificate-bijay-mohan.jpg"
-
-   ya:
-
-   href="certificate-bijay-mohan.pdf"
-
-   target="_blank" hone par certificate
-   new tab mein open hoga.
-*/
+  }
 
 
-document
-  .querySelectorAll('.certificate-link')
-  .forEach((link) => {
+  /* =======================================================
+     STAGGERED REVEAL
+  ======================================================= */
 
-    link.addEventListener(
-      'click',
-      (event) => {
+  const groupedSections = [
+    ".skill-card",
+    ".achievement-item",
+    ".mun-card",
+    ".timeline-item"
+  ];
 
-        const href =
-          link.getAttribute('href');
+  groupedSections.forEach((selector) => {
 
+    const elements = document.querySelectorAll(selector);
 
-        /* Agar certificate abhi upload nahi hua */
+    elements.forEach((element, index) => {
 
-        if (
-          !href ||
-          href === '#' ||
-          href.trim() === ''
-        ) {
+      element.style.transitionDelay =
+        `${Math.min(index * 0.08, 0.4)}s`;
 
-          event.preventDefault();
-
-          alert(
-            'Certificate upload karne ke baad yahan click karke certificate open hoga.'
-          );
-
-        }
-
-      }
-    );
+    });
 
   });
 
 
-/* =========================================================
-   9. SUBTLE BUTTON MAGNET EFFECT
-========================================================= */
+  /* =======================================================
+     HERO PROFILE PHOTO — SUBTLE 3D TILT
+  ======================================================= */
 
-document
-  .querySelectorAll(
-    '.certificate-link, .contact-link'
-  )
-  .forEach((element) => {
+  const profileFrame =
+    document.querySelector(".profile-frame");
 
-    element.addEventListener(
-      'mousemove',
-      (e) => {
+  const profilePhoto =
+    document.querySelector(".profile-photo");
 
-        const rect =
-          element.getBoundingClientRect();
+  if (
+    profileFrame &&
+    profilePhoto &&
+    window.matchMedia("(pointer:fine)").matches
+  ) {
 
+    profileFrame.addEventListener("pointermove", (event) => {
 
-        const x =
-          e.clientX -
-          rect.left -
-          rect.width / 2;
+      const rect =
+        profileFrame.getBoundingClientRect();
 
+      const x =
+        event.clientX - rect.left;
 
-        const y =
-          e.clientY -
-          rect.top -
-          rect.height / 2;
+      const y =
+        event.clientY - rect.top;
 
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-        element.style.transform =
-          `translate(
-            ${x * 0.035}px,
-            ${y * 0.035}px
-          )`;
+      const rotateY =
+        ((x - centerX) / centerX) * 3;
 
-      }
-    );
+      const rotateX =
+        ((y - centerY) / centerY) * -3;
 
+      profilePhoto.style.transform =
+        `perspective(900px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)
+         scale(1.015)`;
 
-    element.addEventListener(
-      'mouseleave',
-      () => {
-
-        element.style.transform = '';
-
-      }
-    );
-
-  });
+    });
 
 
-/* =========================================================
-   10. INTERNSHIP CARD HOVER
-========================================================= */
+    profileFrame.addEventListener("pointerleave", () => {
 
-document
-  .querySelectorAll('.timeline-item')
-  .forEach((card) => {
+      profilePhoto.style.transform =
+        "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
 
-    card.addEventListener(
-      'mouseenter',
-      () => {
+    });
 
-        card.style.zIndex = '5';
-
-      }
-    );
+  }
 
 
-    card.addEventListener(
-      'mouseleave',
-      () => {
+  /* =======================================================
+     SMOKE PARALLAX
+  ======================================================= */
 
-        card.style.zIndex = '';
+  const smokeLayers =
+    document.querySelectorAll(".smoke-layer");
 
-      }
-    );
+  if (
+    smokeLayers.length &&
+    window.matchMedia("(pointer:fine)").matches
+  ) {
 
-  });
+    window.addEventListener("pointermove", (event) => {
+
+      const x =
+        (event.clientX / window.innerWidth - 0.5);
+
+      const y =
+        (event.clientY / window.innerHeight - 0.5);
+
+      smokeLayers.forEach((layer, index) => {
+
+        const strength =
+          (index + 1) * 8;
+
+        layer.style.marginLeft =
+          `${x * strength}px`;
+
+        layer.style.marginTop =
+          `${y * strength}px`;
+
+      });
+
+    });
+
+  }
 
 
-/* =========================================================
-   11. MUN CARD SUBTLE INTERACTION
-========================================================= */
+  /* =======================================================
+     ORBIT — VERY SUBTLE MOUSE MOVEMENT
+  ======================================================= */
 
-document
-  .querySelectorAll('.mun-card')
-  .forEach((card) => {
+  const orbit =
+    document.querySelector(".orbit");
 
-    card.addEventListener(
-      'mousemove',
-      (e) => {
+  if (
+    orbit &&
+    window.matchMedia("(pointer:fine)").matches
+  ) {
 
-        if (window.innerWidth <= 800) {
-          return;
-        }
+    window.addEventListener("pointermove", (event) => {
 
+      const x =
+        (event.clientX / window.innerWidth - 0.5);
+
+      const y =
+        (event.clientY / window.innerHeight - 0.5);
+
+      orbit.style.marginLeft =
+        `${x * 8}px`;
+
+      orbit.style.marginTop =
+        `${y * 8}px`;
+
+    });
+
+  }
+
+
+  /* =======================================================
+     MUN CARD TILT
+  ======================================================= */
+
+  const munCards =
+    document.querySelectorAll(".mun-card");
+
+  if (
+    munCards.length &&
+    window.matchMedia("(pointer:fine)").matches
+  ) {
+
+    munCards.forEach((card) => {
+
+      card.addEventListener("pointermove", (event) => {
 
         const rect =
           card.getBoundingClientRect();
 
-
         const x =
-          (e.clientX - rect.left) /
-          rect.width -
-          0.5;
-
+          event.clientX - rect.left;
 
         const y =
-          (e.clientY - rect.top) /
-          rect.height -
-          0.5;
+          event.clientY - rect.top;
 
+        const rotateY =
+          ((x - rect.width / 2) /
+            rect.width) * 2;
+
+        const rotateX =
+          ((y - rect.height / 2) /
+            rect.height) * -2;
 
         card.style.transform =
-          `translateY(-4px)
-           rotateX(${y * -2}deg)
-           rotateY(${x * 2}deg)`;
+          `perspective(1000px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           translateY(-5px)`;
 
-      }
-    );
-
-
-    card.addEventListener(
-      'mouseleave',
-      () => {
-
-        card.style.transform = '';
-
-      }
-    );
-
-  });
+      });
 
 
-/* =========================================================
-   12. SKILL CARD INTERACTION
-========================================================= */
+      card.addEventListener("pointerleave", () => {
 
-document
-  .querySelectorAll('.skill-card')
-  .forEach((card) => {
+        card.style.transform = "";
 
-    card.addEventListener(
-      'mouseenter',
-      () => {
-
-        card.style.zIndex = '5';
-
-      }
-    );
-
-
-    card.addEventListener(
-      'mouseleave',
-      () => {
-
-        card.style.zIndex = '';
-
-      }
-    );
-
-  });
-
-
-/* =========================================================
-   13. ACHIEVEMENT PHOTO HOVER
-========================================================= */
-
-const achievementPhoto =
-  document.querySelector(
-    '.achievement-photo-box'
-  );
-
-
-if (achievementPhoto) {
-
-  achievementPhoto.addEventListener(
-    'mousemove',
-    (e) => {
-
-      if (window.innerWidth <= 800) {
-        return;
-      }
-
-
-      const rect =
-        achievementPhoto.getBoundingClientRect();
-
-
-      const x =
-        (e.clientX - rect.left) /
-        rect.width -
-        0.5;
-
-
-      const y =
-        (e.clientY - rect.top) /
-        rect.height -
-        0.5;
-
-
-      achievementPhoto.style.transform =
-        `perspective(900px)
-         rotateX(${y * -1.5}deg)
-         rotateY(${x * 1.5}deg)`;
-
-    }
-  );
-
-
-  achievementPhoto.addEventListener(
-    'mouseleave',
-    () => {
-
-      achievementPhoto.style.transform =
-        '';
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   14. ESC KEY — CLOSE MOBILE MENU
-========================================================= */
-
-document.addEventListener(
-  'keydown',
-  (e) => {
-
-    if (
-      e.key === 'Escape' &&
-      nav
-    ) {
-
-      nav.classList.remove(
-        'mobile-open'
-      );
-
-      nav.style.display = '';
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   15. REDUCED MOTION
-========================================================= */
-
-const reducedMotion =
-  window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  );
-
-
-if (reducedMotion.matches) {
-
-  document
-    .querySelectorAll('*')
-    .forEach((element) => {
-
-      element.style.animationDuration =
-        '0.01ms';
-
-      element.style.transitionDuration =
-        '0.01ms';
+      });
 
     });
 
-}
+  }
+
+
+  /* =======================================================
+     SKILL CARD HOVER
+  ======================================================= */
+
+  const skillCards =
+    document.querySelectorAll(".skill-card");
+
+  skillCards.forEach((card) => {
+
+    card.addEventListener("mouseenter", () => {
+
+      const number =
+        card.querySelector(".skill-number");
+
+      if (number) {
+        number.style.color =
+          "rgba(169, 74, 91, 0.30)";
+      }
+
+    });
+
+
+    card.addEventListener("mouseleave", () => {
+
+      const number =
+        card.querySelector(".skill-number");
+
+      if (number) {
+        number.style.color =
+          "rgba(255,255,255,0.12)";
+      }
+
+    });
+
+  });
+
+
+  /* =======================================================
+     ACHIEVEMENT PHOTO HOVER
+  ======================================================= */
+
+  const achievementPhoto =
+    document.querySelector(
+      ".achievement-photo-inner"
+    );
+
+  if (achievementPhoto) {
+
+    achievementPhoto.addEventListener(
+      "mousemove",
+      (event) => {
+
+        const rect =
+          achievementPhoto.getBoundingClientRect();
+
+        const x =
+          event.clientX - rect.left;
+
+        const y =
+          event.clientY - rect.top;
+
+        const moveX =
+          ((x / rect.width) - 0.5) * 7;
+
+        const moveY =
+          ((y / rect.height) - 0.5) * 7;
+
+        achievementPhoto.style.transform =
+          `translate(${moveX}px, ${moveY}px)`;
+
+      }
+    );
+
+
+    achievementPhoto.addEventListener(
+      "mouseleave",
+      () => {
+
+        achievementPhoto.style.transform =
+          "translate(0, 0)";
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     CERTIFICATE LINKS
+  ======================================================= */
+
+  const certificateLinks =
+    document.querySelectorAll(
+      ".certificate-link"
+    );
+
+  certificateLinks.forEach((link) => {
+
+    link.addEventListener("click", (event) => {
+
+      const href =
+        link.getAttribute("href");
+
+      if (
+        !href ||
+        href === "#" ||
+        href.trim() === ""
+      ) {
+
+        event.preventDefault();
+
+        alert(
+          "Certificate will be available here."
+        );
+
+      }
+
+    });
+
+  });
+
+
+  /* =======================================================
+     MAGNET EFFECT ON BUTTONS
+  ======================================================= */
+
+  const magneticElements =
+    document.querySelectorAll(
+      ".primary-btn, .secondary-btn, .certificate-link"
+    );
+
+  if (
+    magneticElements.length &&
+    window.matchMedia("(pointer:fine)").matches
+  ) {
+
+    magneticElements.forEach((element) => {
+
+      element.addEventListener(
+        "mousemove",
+        (event) => {
+
+          const rect =
+            element.getBoundingClientRect();
+
+          const x =
+            event.clientX -
+            rect.left -
+            rect.width / 2;
+
+          const y =
+            event.clientY -
+            rect.top -
+            rect.height / 2;
+
+          element.style.transform =
+            `translate(${x * 0.08}px,
+                        ${y * 0.08}px)`;
+
+        }
+      );
+
+
+      element.addEventListener(
+        "mouseleave",
+        () => {
+
+          element.style.transform = "";
+
+        }
+      );
+
+    });
+
+  }
+
+
+  /* =======================================================
+     ACTIVE NAVIGATION
+  ======================================================= */
+
+  const sections =
+    document.querySelectorAll(
+      "main section[id]"
+    );
+
+  const navLinks =
+    document.querySelectorAll(
+      ".nav a"
+    );
+
+  if (sections.length && navLinks.length) {
+
+    const sectionObserver =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              const id =
+                entry.target.getAttribute("id");
+
+              navLinks.forEach((link) => {
+
+                link.classList.remove("active");
+
+                if (
+                  link.getAttribute("href") ===
+                  `#${id}`
+                ) {
+
+                  link.classList.add("active");
+
+                }
+
+              });
+
+            }
+
+          });
+
+        },
+        {
+          rootMargin: "-35% 0px -55% 0px"
+        }
+      );
+
+    sections.forEach((section) => {
+
+      sectionObserver.observe(section);
+
+    });
+
+  }
+
+
+  /* =======================================================
+     ESCAPE KEY — CLOSE MENU
+  ======================================================= */
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (event.key === "Escape") {
+
+        if (
+          nav &&
+          nav.classList.contains("mobile-open")
+        ) {
+
+          nav.classList.remove("mobile-open");
+
+          nav.style.display = "";
+
+        }
+
+      }
+
+    }
+  );
+
+
+  /* =======================================================
+     IMAGE LOAD FADE
+  ======================================================= */
+
+  const images =
+    document.querySelectorAll("img");
+
+  images.forEach((image) => {
+
+    if (image.complete) {
+
+      image.classList.add("loaded");
+
+    } else {
+
+      image.addEventListener(
+        "load",
+        () => {
+          image.classList.add("loaded");
+        }
+      );
+
+    }
+
+  });
+
+
+  /* =======================================================
+     SMOOTH ANCHOR SCROLL
+  ======================================================= */
+
+  document.querySelectorAll(
+    'a[href^="#"]'
+  ).forEach((link) => {
+
+    link.addEventListener(
+      "click",
+      (event) => {
+
+        const targetId =
+          link.getAttribute("href");
+
+        if (
+          !targetId ||
+          targetId === "#"
+        ) {
+          return;
+        }
+
+        const target =
+          document.querySelector(targetId);
+
+        if (!target) {
+          return;
+        }
+
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+    );
+
+  });
+
+
+  /* =======================================================
+     REDUCED MOTION
+  ======================================================= */
+
+  if (
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ) {
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach((element) => {
+
+        element.classList.add("visible");
+
+      });
+
+  }
+
+
+  /* =======================================================
+     PAGE READY
+  ======================================================= */
+
+  document.body.classList.add("page-ready");
+
+});
