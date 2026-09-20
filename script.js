@@ -1,422 +1,486 @@
-document.addEventListener("DOMContentLoaded", () => {
+// =========================================================
+// SHUBHAM RAJ — FINAL PORTFOLIO SCRIPT
+// =========================================================
 
-  /* =========================
-     CURSOR GLOW
-  ========================= */
 
-  const root = document.documentElement;
+// =========================================================
+// CURSOR GLOW
+// =========================================================
 
-  document.addEventListener("pointermove", (e) => {
-    root.style.setProperty("--mouse-x", `${e.clientX}px`);
-    root.style.setProperty("--mouse-y", `${e.clientY}px`);
+const glow = document.querySelector(".cursor-glow");
+
+if (glow) {
+
+  window.addEventListener("pointermove", (event) => {
+
+    glow.style.left = event.clientX + "px";
+    glow.style.top = event.clientY + "px";
+
+  });
+
+}
+
+
+// =========================================================
+// CURSOR EFFECTS
+// =========================================================
+
+const photoElements = document.querySelectorAll(
+  ".profile-photo, .contact-photo img, .university-photo img, .section-photo img, .achievement-photo-inner img"
+);
+
+const cardElements = document.querySelectorAll(
+  ".timeline-item, .mun-card, .skill-card, .achievement-item"
+);
+
+
+photoElements.forEach((element) => {
+
+  element.addEventListener("mouseenter", () => {
+    document.body.classList.add("cursor-photo");
+  });
+
+  element.addEventListener("mouseleave", () => {
+    document.body.classList.remove("cursor-photo");
+  });
+
+});
+
+
+cardElements.forEach((element) => {
+
+  element.addEventListener("mouseenter", () => {
+    document.body.classList.add("cursor-card");
+  });
+
+  element.addEventListener("mouseleave", () => {
+    document.body.classList.remove("cursor-card");
+  });
+
+});
+
+
+// =========================================================
+// SCROLL REVEAL
+// =========================================================
+//
+// Content remains visible even if observer fails.
+// When supported, elements receive a small reveal animation.
+//
+
+const revealElements = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+
+      entries.forEach((entry) => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("visible");
+
+          observer.unobserve(entry.target);
+
+        }
+
+      });
+
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -40px 0px"
+    }
+  );
+
+
+  revealElements.forEach((element) => {
+
+    observer.observe(element);
+
+  });
+
+}
+
+
+// =========================================================
+// MOBILE MENU
+// =========================================================
+
+const menu = document.querySelector(".menu");
+const nav = document.querySelector(".nav nav");
+
+if (menu && nav) {
+
+  menu.addEventListener("click", () => {
+
+    const isOpen = nav.classList.contains("mobile-open");
+
+    if (isOpen) {
+
+      nav.classList.remove("mobile-open");
+      nav.style.display = "";
+
+    } else {
+
+      nav.classList.add("mobile-open");
+
+      nav.style.display = "flex";
+      nav.style.position = "absolute";
+      nav.style.top = "68px";
+      nav.style.right = "5%";
+      nav.style.flexDirection = "column";
+
+    }
+
   });
 
 
-  /* =========================
-     PROFILE PHOTO 3D EFFECT
-  ========================= */
+  // Close menu when a navigation link is clicked
 
-  const profilePhoto = document.querySelector(".profile-photo");
+  nav.querySelectorAll("a").forEach((link) => {
 
-  if (profilePhoto) {
+    link.addEventListener("click", () => {
 
-    profilePhoto.addEventListener("mousemove", (e) => {
+      nav.classList.remove("mobile-open");
 
-      const rect = profilePhoto.getBoundingClientRect();
-
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const rotateY = ((x / rect.width) - 0.5) * 8;
-      const rotateX = ((y / rect.height) - 0.5) * -8;
-
-      profilePhoto.style.transform =
-        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.025)`;
-    });
-
-    profilePhoto.addEventListener("mouseleave", () => {
-
-      profilePhoto.style.transform =
-        "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
-    });
-  }
-
-
-  /* =========================
-     SMOKE / BACKGROUND PARALLAX
-  ========================= */
-
-  const smokeLayers = document.querySelectorAll(".smoke-layer");
-
-  document.addEventListener("pointermove", (e) => {
-
-    const x = (e.clientX / window.innerWidth - 0.5);
-    const y = (e.clientY / window.innerHeight - 0.5);
-
-    smokeLayers.forEach((layer, index) => {
-
-      const amount = (index + 1) * 8;
-
-      layer.style.transform =
-        `translate(${x * amount}px, ${y * amount}px)`;
-    });
-  });
-
-
-  /* =========================
-     SCROLL REVEAL
-  ========================= */
-
-  const revealElements = document.querySelectorAll(".reveal");
-
-  if ("IntersectionObserver" in window) {
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-
-        entries.forEach((entry) => {
-
-          if (entry.isIntersecting) {
-
-            entry.target.classList.add("visible");
-
-            observer.unobserve(entry.target);
-          }
-        });
-
-      },
-      {
-        threshold: 0.12
+      if (window.innerWidth <= 850) {
+        nav.style.display = "none";
       }
+
+    });
+
+  });
+
+}
+
+
+// =========================================================
+// ACTIVE NAVIGATION
+// =========================================================
+
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav nav a");
+
+if (sections.length && navLinks.length) {
+
+  window.addEventListener("scroll", () => {
+
+    let currentSection = "";
+
+    sections.forEach((section) => {
+
+      const sectionTop = section.offsetTop - 150;
+      const sectionHeight = section.offsetHeight;
+
+      if (
+        window.scrollY >= sectionTop &&
+        window.scrollY < sectionTop + sectionHeight
+      ) {
+
+        currentSection = section.getAttribute("id");
+
+      }
+
+    });
+
+
+    navLinks.forEach((link) => {
+
+      link.classList.remove("active");
+
+      const target = link.getAttribute("href");
+
+      if (target === "#" + currentSection) {
+        link.classList.add("active");
+      }
+
+    });
+
+  });
+
+}
+
+
+// =========================================================
+// PROFILE PHOTO — VERY SUBTLE 3D EFFECT
+// =========================================================
+
+const profilePhoto = document.querySelector(".profile-photo");
+
+if (profilePhoto && window.matchMedia("(pointer: fine)").matches) {
+
+  profilePhoto.addEventListener("mousemove", (event) => {
+
+    const rect = profilePhoto.getBoundingClientRect();
+
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const rotateY = ((x / rect.width) - 0.5) * 4;
+    const rotateX = ((y / rect.height) - 0.5) * -4;
+
+    profilePhoto.style.transform =
+      `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.012)`;
+
+  });
+
+
+  profilePhoto.addEventListener("mouseleave", () => {
+
+    profilePhoto.style.transform =
+      "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
+
+  });
+
+}
+
+
+// =========================================================
+// ORBIT — SMALL PARALLAX
+// =========================================================
+
+const heroMark = document.querySelector(".hero-mark");
+
+if (heroMark && window.matchMedia("(pointer: fine)").matches) {
+
+  window.addEventListener("pointermove", (event) => {
+
+    const x = (event.clientX / window.innerWidth) - 0.5;
+    const y = (event.clientY / window.innerHeight) - 0.5;
+
+    heroMark.style.setProperty(
+      "--mouse-x",
+      `${x * 8}px`
     );
 
-    revealElements.forEach((element) => {
-      observer.observe(element);
-    });
-
-  } else {
-
-    revealElements.forEach((element) => {
-      element.classList.add("visible");
-    });
-  }
-
-
-  /* =========================
-     MOBILE MENU
-  ========================= */
-
-  const menuButton = document.querySelector(".menu");
-  const nav = document.querySelector(".nav nav");
-
-  if (menuButton && nav) {
-
-    menuButton.addEventListener("click", () => {
-
-      const isOpen = nav.classList.contains("mobile-open");
-
-      if (isOpen) {
-
-        nav.classList.remove("mobile-open");
-
-        nav.style.display = "";
-        nav.style.position = "";
-        nav.style.top = "";
-        nav.style.right = "";
-        nav.style.flexDirection = "";
-        nav.style.background = "";
-        nav.style.padding = "";
-        nav.style.gap = "";
-
-      } else {
-
-        nav.classList.add("mobile-open");
-
-        nav.style.display = "flex";
-        nav.style.position = "absolute";
-        nav.style.top = "70px";
-        nav.style.right = "6vw";
-        nav.style.flexDirection = "column";
-        nav.style.background = "#10090b";
-        nav.style.padding = "20px";
-        nav.style.gap = "18px";
-      }
-    });
-
-
-    /* Close menu after clicking a link */
-
-    nav.querySelectorAll("a").forEach((link) => {
-
-      link.addEventListener("click", () => {
-
-        nav.classList.remove("mobile-open");
-
-        nav.style.display = "";
-        nav.style.position = "";
-        nav.style.top = "";
-        nav.style.right = "";
-        nav.style.flexDirection = "";
-        nav.style.background = "";
-        nav.style.padding = "";
-        nav.style.gap = "";
-      });
-    });
-  }
-
-
-  /* =========================
-     ACTIVE NAVIGATION
-  ========================= */
-
-  const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll(".nav nav a");
-
-  if (sections.length && navLinks.length) {
-
-    const updateActiveNav = () => {
-
-      let currentSection = "";
-
-      sections.forEach((section) => {
-
-        const sectionTop = section.offsetTop - 180;
-        const sectionBottom =
-          sectionTop + section.offsetHeight;
-
-        if (
-          window.scrollY >= sectionTop &&
-          window.scrollY < sectionBottom
-        ) {
-          currentSection = section.getAttribute("id");
-        }
-      });
-
-
-      navLinks.forEach((link) => {
-
-        link.classList.remove("active");
-
-        const href = link.getAttribute("href");
-
-        if (href === `#${currentSection}`) {
-          link.classList.add("active");
-        }
-      });
-    };
-
-    window.addEventListener("scroll", updateActiveNav, {
-      passive: true
-    });
-
-    updateActiveNav();
-  }
-
-
-  /* =========================
-     CERTIFICATE LINKS
-  ========================= */
-
-  const certificateLinks =
-    document.querySelectorAll(".certificate-link");
-
-  certificateLinks.forEach((link) => {
-
-    link.addEventListener("click", (e) => {
-
-      const href = link.getAttribute("href");
-
-      if (!href || href === "#" || href.trim() === "") {
-
-        e.preventDefault();
-
-        alert(
-          "Certificate file abhi upload nahi ki gayi hai."
-        );
-      }
-    });
-  });
-
-
-  /* =========================
-     LINK MAGNET EFFECT
-  ========================= */
-
-  const magneticElements =
-    document.querySelectorAll(
-      ".certificate-link, .contact-link"
+    heroMark.style.setProperty(
+      "--mouse-y",
+      `${y * 8}px`
     );
 
-  magneticElements.forEach((element) => {
-
-    element.addEventListener("mousemove", (e) => {
-
-      const rect = element.getBoundingClientRect();
-
-      const x =
-        e.clientX -
-        rect.left -
-        rect.width / 2;
-
-      const y =
-        e.clientY -
-        rect.top -
-        rect.height / 2;
-
-      element.style.transform =
-        `translate(${x * 0.08}px, ${y * 0.08}px)`;
-    });
-
-    element.addEventListener("mouseleave", () => {
-
-      element.style.transform = "translate(0, 0)";
-    });
   });
 
+}
 
-  /* =========================
-     MUN CARD TILT
-  ========================= */
 
-  const munCards =
-    document.querySelectorAll(".mun-card");
+// =========================================================
+// MUN CARD TILT
+// =========================================================
+
+const munCards = document.querySelectorAll(".mun-card");
+
+if (window.matchMedia("(pointer: fine)").matches) {
 
   munCards.forEach((card) => {
 
-    card.addEventListener("mousemove", (e) => {
+    card.addEventListener("mousemove", (event) => {
 
       const rect = card.getBoundingClientRect();
 
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
 
-      const rotateY =
-        ((x / rect.width) - 0.5) * 5;
-
-      const rotateX =
-        ((y / rect.height) - 0.5) * -5;
+      const rotateY = ((x / rect.width) - 0.5) * 2.5;
+      const rotateX = ((y / rect.height) - 0.5) * -2.5;
 
       card.style.transform =
-        `perspective(800px)
-         rotateX(${rotateX}deg)
-         rotateY(${rotateY}deg)
-         translateY(-4px)`;
+        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+
     });
+
 
     card.addEventListener("mouseleave", () => {
 
-      card.style.transform =
-        "perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0)";
+      card.style.transform = "";
+
     });
+
   });
 
+}
 
-  /* =========================
-     SKILL CARD HOVER
-  ========================= */
 
-  const skillCards =
-    document.querySelectorAll(".skill-card");
+// =========================================================
+// SKILL CARD HOVER
+// =========================================================
 
-  skillCards.forEach((card) => {
+const skillCards = document.querySelectorAll(".skill-card");
 
-    card.addEventListener("mouseenter", () => {
+skillCards.forEach((card) => {
 
-      card.style.transform = "translateY(-5px)";
-    });
+  card.addEventListener("mouseenter", () => {
 
-    card.addEventListener("mouseleave", () => {
+    card.style.setProperty(
+      "--skill-glow",
+      "rgba(201,166,107,0.08)"
+    );
 
-      card.style.transform = "translateY(0)";
-    });
   });
 
+  card.addEventListener("mouseleave", () => {
 
-  /* =========================
-     ACHIEVEMENT PHOTO
-  ========================= */
+    card.style.removeProperty("--skill-glow");
 
-  const achievementPhoto =
-    document.querySelector(".achievement-photo-inner");
+  });
 
-  if (achievementPhoto) {
+});
 
-    achievementPhoto.addEventListener("mousemove", (e) => {
 
-      const rect =
-        achievementPhoto.getBoundingClientRect();
+// =========================================================
+// IMAGE HOVER PARALLAX
+// =========================================================
 
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+const galleryImages = document.querySelectorAll(
+  ".university-photo img, .section-photo img, .achievement-photo-inner img, .contact-photo img"
+);
 
-      const rotateY =
-        ((x / rect.width) - 0.5) * 4;
+if (window.matchMedia("(pointer: fine)").matches) {
 
-      const rotateX =
-        ((y / rect.height) - 0.5) * -4;
+  galleryImages.forEach((image) => {
 
-      achievementPhoto.style.transform =
-        `perspective(700px)
-         rotateX(${rotateX}deg)
-         rotateY(${rotateY}deg)
-         scale(1.01)`;
+    image.addEventListener("mousemove", (event) => {
+
+      const rect = image.getBoundingClientRect();
+
+      const x = ((event.clientX - rect.left) / rect.width) - 0.5;
+      const y = ((event.clientY - rect.top) / rect.height) - 0.5;
+
+      image.style.transform =
+        `scale(1.035) translate(${x * 5}px, ${y * 5}px)`;
+
     });
 
-    achievementPhoto.addEventListener("mouseleave", () => {
 
-      achievementPhoto.style.transform =
-        "perspective(700px) rotateX(0deg) rotateY(0deg) scale(1)";
+    image.addEventListener("mouseleave", () => {
+
+      image.style.transform = "scale(1)";
+
     });
-  }
+
+  });
+
+}
 
 
-  /* =========================
-     ESCAPE KEY
-     CLOSES MOBILE MENU
-  ========================= */
+// =========================================================
+// CERTIFICATE LINKS
+// =========================================================
 
-  document.addEventListener("keydown", (e) => {
+const certificateLinks = document.querySelectorAll(".certificate-link");
 
-    if (e.key === "Escape") {
+certificateLinks.forEach((link) => {
 
-      if (nav) {
+  link.addEventListener("click", (event) => {
 
-        nav.classList.remove("mobile-open");
+    const href = link.getAttribute("href");
 
-        nav.style.display = "";
-        nav.style.position = "";
-        nav.style.top = "";
-        nav.style.right = "";
-        nav.style.flexDirection = "";
-        nav.style.background = "";
-        nav.style.padding = "";
-        nav.style.gap = "";
-      }
+    if (!href || href === "#" || href.trim() === "") {
+
+      event.preventDefault();
+
+      alert("Certificate file will be added here.");
+
     }
+
   });
 
+});
 
-  /* =========================
-     REDUCED MOTION SUPPORT
-  ========================= */
 
-  const reducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+// =========================================================
+// SMOOTH INTERNAL LINKS
+// =========================================================
 
-  if (reducedMotion) {
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
 
-    document.querySelectorAll(".reveal").forEach((element) => {
+  link.addEventListener("click", (event) => {
 
-      element.style.transition = "none";
-      element.style.opacity = "1";
-      element.style.transform = "none";
-    });
+    const targetId = link.getAttribute("href");
 
-    smokeLayers.forEach((layer) => {
-      layer.style.animation = "none";
-    });
+    if (
+      targetId &&
+      targetId !== "#" &&
+      document.querySelector(targetId)
+    ) {
+
+      event.preventDefault();
+
+      document.querySelector(targetId).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    }
+
+  });
+
+});
+
+
+// =========================================================
+// CLOSE MOBILE MENU WITH ESCAPE
+// =========================================================
+
+document.addEventListener("keydown", (event) => {
+
+  if (event.key === "Escape" && nav) {
+
+    nav.classList.remove("mobile-open");
+
+    if (window.innerWidth <= 850) {
+      nav.style.display = "none";
+    }
+
   }
+
+});
+
+
+// =========================================================
+// RESPONSIVE MENU RESET
+// =========================================================
+
+window.addEventListener("resize", () => {
+
+  if (!nav) return;
+
+  if (window.innerWidth > 850) {
+
+    nav.style.display = "";
+    nav.style.position = "";
+    nav.style.top = "";
+    nav.style.right = "";
+    nav.style.flexDirection = "";
+    nav.classList.remove("mobile-open");
+
+  }
+
+});
+
+
+// =========================================================
+// REDUCED MOTION
+// =========================================================
+
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+);
+
+if (reducedMotion.matches) {
+
+  document.documentElement.style.scrollBehavior = "auto";
+
+}
+
+
+// =========================================================
+// PAGE READY
+// =========================================================
+
+window.addEventListener("load", () => {
+
+  document.body.classList.add("page-loaded");
 
 });
