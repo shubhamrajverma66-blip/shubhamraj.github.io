@@ -10,14 +10,10 @@
 const glow = document.querySelector(".cursor-glow");
 
 if (glow) {
-
   window.addEventListener("pointermove", (event) => {
-
-    glow.style.left = event.clientX + "px";
-    glow.style.top = event.clientY + "px";
-
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
   });
-
 }
 
 
@@ -32,7 +28,6 @@ const photoElements = document.querySelectorAll(
 const cardElements = document.querySelectorAll(
   ".timeline-item, .mun-card, .skill-card, .achievement-item"
 );
-
 
 photoElements.forEach((element) => {
 
@@ -63,10 +58,6 @@ cardElements.forEach((element) => {
 // =========================================================
 // SCROLL REVEAL
 // =========================================================
-//
-// Content remains visible even if observer fails.
-// When supported, elements receive a small reveal animation.
-//
 
 const revealElements = document.querySelectorAll(".reveal");
 
@@ -94,11 +85,14 @@ if ("IntersectionObserver" in window) {
     }
   );
 
+  revealElements.forEach((element) => {
+    observer.observe(element);
+  });
+
+} else {
 
   revealElements.forEach((element) => {
-
-    observer.observe(element);
-
+    element.classList.add("visible");
   });
 
 }
@@ -115,11 +109,13 @@ if (menu && nav) {
 
   menu.addEventListener("click", () => {
 
-    const isOpen = nav.classList.contains("mobile-open");
+    const isOpen =
+      nav.classList.contains("mobile-open");
 
     if (isOpen) {
 
       nav.classList.remove("mobile-open");
+
       nav.style.display = "";
 
     } else {
@@ -127,6 +123,7 @@ if (menu && nav) {
       nav.classList.add("mobile-open");
 
       nav.style.display = "flex";
+
       nav.style.position = "absolute";
       nav.style.top = "68px";
       nav.style.right = "5%";
@@ -136,8 +133,6 @@ if (menu && nav) {
 
   });
 
-
-  // Close menu when a navigation link is clicked
 
   nav.querySelectorAll("a").forEach((link) => {
 
@@ -165,22 +160,24 @@ const navLinks = document.querySelectorAll(".nav nav a");
 
 if (sections.length && navLinks.length) {
 
-  window.addEventListener("scroll", () => {
+  const updateActiveNav = () => {
 
     let currentSection = "";
 
     sections.forEach((section) => {
 
-      const sectionTop = section.offsetTop - 150;
-      const sectionHeight = section.offsetHeight;
+      const sectionTop =
+        section.offsetTop - 160;
+
+      const sectionBottom =
+        sectionTop + section.offsetHeight;
 
       if (
         window.scrollY >= sectionTop &&
-        window.scrollY < sectionTop + sectionHeight
+        window.scrollY < sectionBottom
       ) {
-
-        currentSection = section.getAttribute("id");
-
+        currentSection =
+          section.getAttribute("id");
       }
 
     });
@@ -190,77 +187,122 @@ if (sections.length && navLinks.length) {
 
       link.classList.remove("active");
 
-      const target = link.getAttribute("href");
+      const target =
+        link.getAttribute("href");
 
-      if (target === "#" + currentSection) {
+      if (target === `#${currentSection}`) {
         link.classList.add("active");
       }
 
     });
 
-  });
+  };
+
+
+  window.addEventListener(
+    "scroll",
+    updateActiveNav,
+    { passive: true }
+  );
+
+  updateActiveNav();
 
 }
 
 
 // =========================================================
-// PROFILE PHOTO — VERY SUBTLE 3D EFFECT
+// PROFILE PHOTO — SUBTLE 3D EFFECT
 // =========================================================
 
-const profilePhoto = document.querySelector(".profile-photo");
+const profilePhoto =
+  document.querySelector(".profile-photo");
 
-if (profilePhoto && window.matchMedia("(pointer: fine)").matches) {
+if (
+  profilePhoto &&
+  window.matchMedia("(pointer: fine)").matches
+) {
 
-  profilePhoto.addEventListener("mousemove", (event) => {
+  profilePhoto.addEventListener(
+    "mousemove",
+    (event) => {
 
-    const rect = profilePhoto.getBoundingClientRect();
+      const rect =
+        profilePhoto.getBoundingClientRect();
 
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+      const x =
+        event.clientX - rect.left;
 
-    const rotateY = ((x / rect.width) - 0.5) * 4;
-    const rotateX = ((y / rect.height) - 0.5) * -4;
+      const y =
+        event.clientY - rect.top;
 
-    profilePhoto.style.transform =
-      `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.012)`;
+      const rotateY =
+        ((x / rect.width) - 0.5) * 4;
 
-  });
+      const rotateX =
+        ((y / rect.height) - 0.5) * -4;
+
+      profilePhoto.style.transform =
+        `perspective(800px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)
+         scale(1.012)`;
+
+    }
+  );
 
 
-  profilePhoto.addEventListener("mouseleave", () => {
+  profilePhoto.addEventListener(
+    "mouseleave",
+    () => {
 
-    profilePhoto.style.transform =
-      "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
+      profilePhoto.style.transform =
+        "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
 
-  });
+    }
+  );
 
 }
 
 
 // =========================================================
-// ORBIT — SMALL PARALLAX
+// HERO ORBIT PARALLAX
 // =========================================================
 
-const heroMark = document.querySelector(".hero-mark");
+const heroMark =
+  document.querySelector(".hero-mark");
 
-if (heroMark && window.matchMedia("(pointer: fine)").matches) {
+if (
+  heroMark &&
+  window.matchMedia("(pointer: fine)").matches
+) {
 
-  window.addEventListener("pointermove", (event) => {
+  window.addEventListener(
+    "pointermove",
+    (event) => {
 
-    const x = (event.clientX / window.innerWidth) - 0.5;
-    const y = (event.clientY / window.innerHeight) - 0.5;
+      const x =
+        event.clientX /
+        window.innerWidth -
+        0.5;
 
-    heroMark.style.setProperty(
-      "--mouse-x",
-      `${x * 8}px`
-    );
+      const y =
+        event.clientY /
+        window.innerHeight -
+        0.5;
 
-    heroMark.style.setProperty(
-      "--mouse-y",
-      `${y * 8}px`
-    );
+      heroMark.style.setProperty(
+        "--mouse-x",
+        `${x * 6}px`
+      );
 
-  });
+      heroMark.style.setProperty(
+        "--mouse-y",
+        `${y * 6}px`
+      );
+
+    },
+    { passive: true }
+  );
 
 }
 
@@ -269,33 +311,53 @@ if (heroMark && window.matchMedia("(pointer: fine)").matches) {
 // MUN CARD TILT
 // =========================================================
 
-const munCards = document.querySelectorAll(".mun-card");
+const munCards =
+  document.querySelectorAll(".mun-card");
 
-if (window.matchMedia("(pointer: fine)").matches) {
+if (
+  munCards.length &&
+  window.matchMedia("(pointer: fine)").matches
+) {
 
   munCards.forEach((card) => {
 
-    card.addEventListener("mousemove", (event) => {
+    card.addEventListener(
+      "mousemove",
+      (event) => {
 
-      const rect = card.getBoundingClientRect();
+        const rect =
+          card.getBoundingClientRect();
 
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+        const x =
+          event.clientX - rect.left;
 
-      const rotateY = ((x / rect.width) - 0.5) * 2.5;
-      const rotateX = ((y / rect.height) - 0.5) * -2.5;
+        const y =
+          event.clientY - rect.top;
 
-      card.style.transform =
-        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+        const rotateY =
+          ((x / rect.width) - 0.5) * 2.5;
 
-    });
+        const rotateX =
+          ((y / rect.height) - 0.5) * -2.5;
+
+        card.style.transform =
+          `perspective(900px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           translateY(-5px)`;
+
+      }
+    );
 
 
-    card.addEventListener("mouseleave", () => {
+    card.addEventListener(
+      "mouseleave",
+      () => {
 
-      card.style.transform = "";
+        card.style.transform = "";
 
-    });
+      }
+    );
 
   });
 
@@ -306,58 +368,97 @@ if (window.matchMedia("(pointer: fine)").matches) {
 // SKILL CARD HOVER
 // =========================================================
 
-const skillCards = document.querySelectorAll(".skill-card");
+const skillCards =
+  document.querySelectorAll(".skill-card");
 
 skillCards.forEach((card) => {
 
-  card.addEventListener("mouseenter", () => {
+  card.addEventListener(
+    "mouseenter",
+    () => {
 
-    card.style.setProperty(
-      "--skill-glow",
-      "rgba(201,166,107,0.08)"
-    );
+      card.style.setProperty(
+        "--skill-glow",
+        "rgba(201,166,107,0.08)"
+      );
 
-  });
+    }
+  );
 
-  card.addEventListener("mouseleave", () => {
 
-    card.style.removeProperty("--skill-glow");
+  card.addEventListener(
+    "mouseleave",
+    () => {
 
-  });
+      card.style.removeProperty(
+        "--skill-glow"
+      );
+
+    }
+  );
 
 });
 
 
 // =========================================================
 // IMAGE HOVER PARALLAX
+// IMPORTANT:
+// Normalized movement so images DON'T jump wildly.
 // =========================================================
 
-const galleryImages = document.querySelectorAll(
-  ".university-photo img, .section-photo img, .achievement-photo-inner img, .contact-photo img"
-);
+const galleryImages =
+  document.querySelectorAll(
+    ".university-photo img, .section-photo img, .achievement-photo-inner img, .contact-photo img"
+  );
 
-if (window.matchMedia("(pointer: fine)").matches) {
+
+if (
+  galleryImages.length &&
+  window.matchMedia("(pointer: fine)").matches
+) {
 
   galleryImages.forEach((image) => {
 
-    image.addEventListener("mousemove", (event) => {
+    image.addEventListener(
+      "mousemove",
+      (event) => {
 
-      const rect = image.getBoundingClientRect();
+        const rect =
+          image.getBoundingClientRect();
 
-      const x = ((event.clientX - rect.left) / rect.width) - 0.5;
-      const y = ((event.clientY - rect.top) / rect.height) - 0.5;
+        const x =
+          (event.clientX - rect.left) /
+          rect.width -
+          0.5;
 
-      image.style.transform =
-        `scale(1.035) translate(${x * 5}px, ${y * 5}px)`;
+        const y =
+          (event.clientY - rect.top) /
+          rect.height -
+          0.5;
 
-    });
+        const moveX =
+          x * 7;
+
+        const moveY =
+          y * 7;
+
+        image.style.transform =
+          `scale(1.035)
+           translate(${moveX}px, ${moveY}px)`;
+
+      }
+    );
 
 
-    image.addEventListener("mouseleave", () => {
+    image.addEventListener(
+      "mouseleave",
+      () => {
 
-      image.style.transform = "scale(1)";
+        image.style.transform =
+          "scale(1) translate(0, 0)";
 
-    });
+      }
+    );
 
   });
 
@@ -368,23 +469,34 @@ if (window.matchMedia("(pointer: fine)").matches) {
 // CERTIFICATE LINKS
 // =========================================================
 
-const certificateLinks = document.querySelectorAll(".certificate-link");
+const certificateLinks =
+  document.querySelectorAll(".certificate-link");
 
 certificateLinks.forEach((link) => {
 
-  link.addEventListener("click", (event) => {
+  link.addEventListener(
+    "click",
+    (event) => {
 
-    const href = link.getAttribute("href");
+      const href =
+        link.getAttribute("href");
 
-    if (!href || href === "#" || href.trim() === "") {
+      if (
+        !href ||
+        href === "#" ||
+        href.trim() === ""
+      ) {
 
-      event.preventDefault();
+        event.preventDefault();
 
-      alert("Certificate file will be added here.");
+        alert(
+          "Certificate file will be added here."
+        );
+
+      }
 
     }
-
-  });
+  );
 
 });
 
@@ -393,84 +505,108 @@ certificateLinks.forEach((link) => {
 // SMOOTH INTERNAL LINKS
 // =========================================================
 
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
+document
+  .querySelectorAll('a[href^="#"]')
+  .forEach((link) => {
 
-  link.addEventListener("click", (event) => {
+    link.addEventListener(
+      "click",
+      (event) => {
 
-    const targetId = link.getAttribute("href");
+        const targetId =
+          link.getAttribute("href");
 
-    if (
-      targetId &&
-      targetId !== "#" &&
-      document.querySelector(targetId)
-    ) {
+        if (
+          targetId &&
+          targetId !== "#" &&
+          document.querySelector(targetId)
+        ) {
 
-      event.preventDefault();
+          event.preventDefault();
 
-      document.querySelector(targetId).scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+          document
+            .querySelector(targetId)
+            .scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
 
-    }
+        }
+
+      }
+    );
 
   });
 
-});
-
 
 // =========================================================
-// CLOSE MOBILE MENU WITH ESCAPE
+// ESCAPE — CLOSE MENU
 // =========================================================
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener(
+  "keydown",
+  (event) => {
 
-  if (event.key === "Escape" && nav) {
+    if (
+      event.key === "Escape" &&
+      nav
+    ) {
 
-    nav.classList.remove("mobile-open");
+      nav.classList.remove(
+        "mobile-open"
+      );
 
-    if (window.innerWidth <= 850) {
-      nav.style.display = "none";
+      if (window.innerWidth <= 850) {
+        nav.style.display = "none";
+      }
+
     }
 
   }
-
-});
+);
 
 
 // =========================================================
 // RESPONSIVE MENU RESET
 // =========================================================
 
-window.addEventListener("resize", () => {
+window.addEventListener(
+  "resize",
+  () => {
 
-  if (!nav) return;
+    if (!nav) return;
 
-  if (window.innerWidth > 850) {
+    if (window.innerWidth > 850) {
 
-    nav.style.display = "";
-    nav.style.position = "";
-    nav.style.top = "";
-    nav.style.right = "";
-    nav.style.flexDirection = "";
-    nav.classList.remove("mobile-open");
+      nav.style.display = "";
+      nav.style.position = "";
+      nav.style.top = "";
+      nav.style.right = "";
+      nav.style.flexDirection = "";
+
+      nav.classList.remove(
+        "mobile-open"
+      );
+
+    }
 
   }
-
-});
+);
 
 
 // =========================================================
 // REDUCED MOTION
 // =========================================================
 
-const reducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-);
+const reducedMotion =
+  window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
 
 if (reducedMotion.matches) {
 
-  document.documentElement.style.scrollBehavior = "auto";
+  document.documentElement.style.scrollBehavior =
+    "auto";
 
 }
 
@@ -479,8 +615,13 @@ if (reducedMotion.matches) {
 // PAGE READY
 // =========================================================
 
-window.addEventListener("load", () => {
+window.addEventListener(
+  "load",
+  () => {
 
-  document.body.classList.add("page-loaded");
+    document.body.classList.add(
+      "page-loaded"
+    );
 
-});
+  }
+);
