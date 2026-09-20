@@ -1,102 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <meta
-    name="description"
-    content="Shubham Raj — Law Student, Legal Researcher, MUN Chair & Public Speaker"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Shubham Raj — Law Student & Legal Researcher</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta
+    name="description"
+    content="Shubham Raj — B.A. LL.B. (Hons.) law student, legal researcher, debater, MUN chairperson and aspiring advocate."
+  >
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- Cursor -->
+  <!-- =========================================
+       CURSOR SYSTEM
+  ========================================= -->
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  <div class="cursor-label"></div>
   <div class="cursor-glow"></div>
 
-  <!-- ================= NAVBAR ================= -->
+
+  <!-- =========================================
+       NAVIGATION
+  ========================================= -->
 
   <header class="nav">
 
-    <a class="brand" href="#home">
+    <div class="nav-logo">
       <span>SR</span>
-      <b>Shubham Raj</b>
-    </a>
-
-    <button class="menu" aria-label="Open menu">
-      <span></span>
-      <span></span>
-    </button>
+    </div>
 
     <nav>
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
+      <a href="#about">ABOUT</a>
+      <a href="#experience">EXPERIENCE</a>
       <a href="#mun">MUN</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
+      <a href="#achievements">ACHIEVEMENTS</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#contact">CONTACT</a>
     </nav>
+
+    <button class="menu" aria-label="Open Menu">
+      ☰
+    </button>
 
   </header>
 
 
   <main>
 
-    <!-- ================= HERO ================= -->
+    <!-- =========================================
+         HERO
+    ========================================= -->
 
-    <section id="home" class="hero">
-
-      <div class="hero-noise"></div>
-
-      <!-- Moving smoke -->
-      <div class="smoke-layer" aria-hidden="true">
-        <span class="smoke smoke-1"></span>
-        <span class="smoke smoke-2"></span>
-        <span class="smoke smoke-3"></span>
-        <span class="smoke smoke-4"></span>
-        <span class="smoke smoke-5"></span>
-        <span class="smoke smoke-6"></span>
-      </div>
-
+    <section
+      class="hero cursor-section hero-section"
+      data-cursor="EXPLORE"
+    >
 
       <div class="hero-copy reveal">
 
-        <p class="eyebrow">
-          LAW • RESEARCH • MUN
-        </p>
+        <div class="eyebrow">
+          LAW • RESEARCH • MUN • ADVOCACY
+        </div>
 
         <h1>
-          Shubham<br>
-          <em>Raj.</em>
+          Shubham
+          <span>Raj</span>
         </h1>
 
-        <p class="lead">
-          Law student, legal researcher, public speaker and MUN chair
-          building a strong foundation in advocacy, drafting,
-          research and leadership.
+        <div class="hero-subtitle">
+
+          <strong>B.A. LL.B. (Hons.)</strong>
+
+          <span class="subtitle-divider">•</span>
+
+          <span>LAW • ADVOCACY • LEADERSHIP</span>
+
+        </div>
+
+        <p class="hero-description">
+          Law student at the Faculty of Law, University of Allahabad,
+          passionate about legal research, litigation, advocacy,
+          public speaking and leadership.
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-buttons">
 
-          <a class="btn primary" href="#about">
-            Explore portfolio <span>↘</span>
+          <a href="#experience" class="btn btn-primary">
+            Explore My Work
           </a>
 
-          <a class="btn ghost" href="#contact">
-            Get in touch
+          <a href="#contact" class="btn btn-outline">
+            Get In Touch
           </a>
 
         </div>
@@ -104,120 +105,191 @@
       </div>
 
 
-      <!-- HERO PHOTO -->
+      <!-- HERO VISUAL -->
 
       <div class="hero-mark reveal">
 
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
+        <!-- Smoke -->
 
-        <div class="smoke-ring"></div>
+        <div class="smoke-layer">
+          <span class="smoke smoke-one"></span>
+          <span class="smoke smoke-two"></span>
+          <span class="smoke smoke-three"></span>
+          <span class="smoke smoke-four"></span>
+          <span class="smoke smoke-five"></span>
+          <span class="smoke smoke-six"></span>
+        </div>
 
-        <div class="profile-photo">
+
+        <!-- Central Glow -->
+
+        <div class="hero-core"></div>
+
+
+        <!-- ORBITS -->
+
+        <div class="orbit orbit-main"></div>
+        <div class="orbit-ring-3"></div>
+        <div class="orbit-ring-4"></div>
+
+        <span class="orbit-dot orbit-dot-one"></span>
+        <span class="orbit-dot orbit-dot-two"></span>
+        <span class="orbit-dot orbit-dot-three"></span>
+
+
+        <!-- PROFILE PHOTO -->
+
+        <div
+          class="profile-photo interactive-photo"
+          data-cursor="VIEW"
+        >
 
           <img
             src="profile.jpg"
             alt="Shubham Raj"
-          />
+          >
+
+          <div class="photo-overlay">
+            <span>LAW • ADVOCACY</span>
+          </div>
 
         </div>
+
 
         <div class="photo-caption">
-          LAW • ADVOCACY • LEADERSHIP
+          <span>BA LL.B. (HONS.)</span>
+          <small>University of Allahabad</small>
         </div>
 
-        <div class="side-note">
-          B.A. LL.B. (HONS.)<br>
-          3RD YEAR
-        </div>
-
-      </div>
-
-
-      <div class="scroll">
-        SCROLL <span>↓</span>
       </div>
 
     </section>
 
 
-    <!-- ================= ABOUT ================= -->
+    <!-- =========================================
+         ABOUT
+    ========================================= -->
 
-    <section id="about" class="section about">
+    <section
+      id="about"
+      class="section cursor-section about-section"
+      data-cursor="ABOUT"
+    >
 
-      <div class="section-head reveal">
-        <span>01</span>
-        <h2>About me</h2>
+      <div class="section-heading reveal">
+
+        <span class="section-number">01</span>
+
+        <div>
+          <p class="section-kicker">WHO I AM</p>
+          <h2>About Me</h2>
+        </div>
+
       </div>
 
 
       <div class="about-grid">
 
-        <div class="big-quote reveal">
-          “Curiosity is the beginning of every good argument.”
-        </div>
+        <div class="about-content reveal">
 
-
-        <div class="about-text reveal">
+          <div class="quote-box">
+            <span>“</span>
+            Research with precision. Speak with purpose.
+            Advocate with responsibility.
+            <span>”</span>
+          </div>
 
           <p>
-            I am <strong>Shubham Raj</strong>, a 3rd-year
-            B.A., LL.B. (Hons.) student at the
-            <strong>University of Allahabad, Prayagraj.</strong>
+            I am a motivated and detail-oriented law student pursuing
+            B.A. LL.B. (Hons.) at the Faculty of Law, University of
+            Allahabad.
           </p>
 
           <p>
-            My interests lie at the intersection of
-            <strong>law, legal research, drafting, advocacy,
-            debating and public speaking.</strong>
+            My interests lie in legal research, drafting, litigation,
+            advocacy, public speaking and structured legal analysis.
+            Through internships and court exposure, I have developed
+            practical familiarity with pleadings, written submissions,
+            affidavits, legal research notes and case preparation.
           </p>
 
           <p>
-            Alongside academics, I have actively participated
-            in Model United Nations conferences, public speaking
-            forums and university activities, and have gradually
-            moved into chairing and committee-management roles.
-          </p>
-
-          <p>
-            My legal exposure includes litigation chambers,
-            High Court research, District Court matters,
-            DRT proceedings, banking and recovery matters,
-            arbitration, consumer disputes, insolvency and
-            procedural research.
+            Alongside academics, I actively participate in MUNs,
+            debating, youth conferences and leadership activities.
           </p>
 
         </div>
 
-      </div>
 
+        <!-- SECOND PROFILE AREA -->
 
-      <!-- UNIVERSITY IMAGE AREA -->
+        <div
+          class="secondary-profile-card reveal interactive-card"
+          data-cursor="PROFILE"
+        >
 
-      <div class="university-card reveal">
+          <div class="secondary-photo">
 
-        <div class="university-photo image-placeholder">
-          <span>UNIVERSITY PHOTO</span>
-          <small>Place your University of Allahabad photo here</small>
+            <img
+              src="profile.jpg"
+              alt="Shubham Raj"
+            >
+
+            <div class="secondary-photo-glow"></div>
+
+          </div>
+
+          <div class="secondary-profile-info">
+
+            <span>LAW STUDENT</span>
+
+            <h3>Shubham Raj</h3>
+
+            <p>
+              Research • Advocacy • Leadership
+            </p>
+
+          </div>
+
         </div>
 
-        <div class="university-info">
 
-          <p class="eyebrow">
-            ACADEMICS
-          </p>
+        <!-- UNIVERSITY -->
 
-          <h3>
-            University of Allahabad
-          </h3>
+        <div
+          class="university-card reveal interactive-card"
+          data-cursor="UNIVERSITY"
+        >
 
-          <p>
-            B.A. LL.B. (Hons.) · 2024–2029
-          </p>
+          <div class="image-placeholder university-placeholder">
 
-          <span>
-            Faculty of Law • Prayagraj
-          </span>
+            <div class="placeholder-icon">⚖</div>
+
+            <span>UNIVERSITY PHOTO</span>
+
+            <small>
+              Upload university image here
+            </small>
+
+          </div>
+
+          <div class="university-info">
+
+            <span>EDUCATION</span>
+
+            <h3>
+              Faculty of Law
+            </h3>
+
+            <p>
+              University of Allahabad
+            </p>
+
+            <small>
+              B.A. LL.B. (Hons.) • 2024–2029
+            </small>
+
+          </div>
 
         </div>
 
@@ -226,38 +298,51 @@
     </section>
 
 
-    <!-- ================= EXPERIENCE ================= -->
+    <!-- =========================================
+         EXPERIENCE
+    ========================================= -->
 
-    <section id="experience" class="section dark-section">
+    <section
+      id="experience"
+      class="section cursor-section experience-section"
+      data-cursor="LEGAL"
+    >
 
-      <div class="section-head reveal">
-        <span>02</span>
-        <h2>Legal exposure</h2>
+      <div class="section-heading reveal">
+
+        <span class="section-number">02</span>
+
+        <div>
+          <p class="section-kicker">PRACTICAL EXPOSURE</p>
+          <h2>Legal Experience</h2>
+        </div>
+
       </div>
 
 
       <div class="experience-layout">
 
 
-        <!-- LAW PHOTO -->
+        <!-- LAW IMAGE -->
 
-        <aside class="experience-image reveal">
+        <div
+          class="experience-image reveal interactive-card"
+          data-cursor="LAW"
+        >
 
-          <div class="image-placeholder tall-placeholder">
+          <div class="image-placeholder law-placeholder">
 
-            <span>LAW / INTERNSHIP PHOTO</span>
+            <div class="placeholder-icon">⚖</div>
+
+            <span>LAW / COURT PHOTO</span>
 
             <small>
-              Add a chamber, court or internship photograph here
+              Upload legal internship / court image
             </small>
 
           </div>
 
-          <div class="image-label">
-            LITIGATION • RESEARCH • DRAFTING
-          </div>
-
-        </aside>
+        </div>
 
 
         <!-- TIMELINE -->
@@ -265,39 +350,55 @@
         <div class="timeline">
 
 
-          <article class="timeline-item reveal">
+          <!-- INTERNSHIP 1 -->
 
-            <div class="year">
-              Jan–Feb<br>
-              2026
+          <article
+            class="timeline-item reveal certificate-item"
+            data-certificate="certificate1.jpg"
+            data-cursor="CERTIFICATE"
+          >
+
+            <div class="timeline-number">
+              01
             </div>
 
-            <div>
+            <div class="timeline-content">
+
+              <div class="timeline-top">
+
+                <span>
+                  JAN — FEB 2026
+                </span>
+
+                <span class="timeline-location">
+                  DELHI HIGH COURT
+                </span>
+
+              </div>
 
               <h3>
                 Chamber of Adv. Bijay Mohan Goswami
               </h3>
 
-              <p class="muted">
-                Delhi High Court • Commercial Litigation
-              </p>
+              <h4>
+                Commercial Litigation
+              </h4>
 
               <p>
-                Assisted in commercial suit filings and civil
-                litigation matters, including drafting and reviewing
-                written statements, pleadings, applications and
-                affidavits.
-              </p>
-
-              <p>
-                Also gained exposure to DRT proceedings, bank loan
-                recovery matters and related litigation documentation.
+                Assisted in commercial suit filings and civil litigation.
+                Worked on written statements, pleadings, applications,
+                affidavits and bank loan recovery documentation.
               </p>
 
               <div class="tags">
-                <span>Commercial Suits</span>
-                <span>Written Statements</span>
-                <span>DRT Proceedings</span>
+                <span>COMMERCIAL SUITS</span>
+                <span>WRITTEN STATEMENTS</span>
+                <span>DRT PROCEEDINGS</span>
+              </div>
+
+              <div class="certificate-button">
+                <span>VIEW CERTIFICATE</span>
+                <b>↗</b>
               </div>
 
             </div>
@@ -305,34 +406,56 @@
           </article>
 
 
-          <article class="timeline-item reveal">
+          <!-- INTERNSHIP 2 -->
 
-            <div class="year">
-              Sept–Oct<br>
-              2025
+          <article
+            class="timeline-item reveal certificate-item"
+            data-certificate="certificate2.jpg"
+            data-cursor="CERTIFICATE"
+          >
+
+            <div class="timeline-number">
+              02
             </div>
 
-            <div>
+            <div class="timeline-content">
+
+              <div class="timeline-top">
+
+                <span>
+                  SEPT — OCT 2025
+                </span>
+
+                <span class="timeline-location">
+                  DELHI
+                </span>
+
+              </div>
 
               <h3>
                 Legal Scriptures
               </h3>
 
-              <p class="muted">
-                Delhi • High Court Research
-              </p>
+              <h4>
+                High Court Research
+              </h4>
 
               <p>
-                Conducted detailed legal research on civil and
-                procedural matters, assisted in preparing research
-                notes and applications, observed court proceedings
-                and prepared daily court reports.
+                Conducted in-depth legal research on civil and procedural
+                matters, assisted in drafting applications and research
+                notes, observed court proceedings and prepared daily
+                court reports.
               </p>
 
               <div class="tags">
-                <span>Legal Research</span>
-                <span>High Court</span>
-                <span>Daily Court Reporting</span>
+                <span>LEGAL RESEARCH</span>
+                <span>HIGH COURT</span>
+                <span>COURT REPORTING</span>
+              </div>
+
+              <div class="certificate-button">
+                <span>VIEW CERTIFICATE</span>
+                <b>↗</b>
               </div>
 
             </div>
@@ -340,39 +463,55 @@
           </article>
 
 
-          <article class="timeline-item reveal">
+          <!-- INTERNSHIP 3 -->
 
-            <div class="year">
-              May–July<br>
-              2025
+          <article
+            class="timeline-item reveal certificate-item"
+            data-certificate="certificate3.jpg"
+            data-cursor="CERTIFICATE"
+          >
+
+            <div class="timeline-number">
+              03
             </div>
 
-            <div>
+            <div class="timeline-content">
+
+              <div class="timeline-top">
+
+                <span>
+                  MAY — JULY 2025
+                </span>
+
+                <span class="timeline-location">
+                  TIS HAZARI
+                </span>
+
+              </div>
 
               <h3>
                 Tis Hazari Litigation Chambers
               </h3>
 
-              <p class="muted">
-                Chambers of Adv. Pankaj & Adv. Anil Kumar Singh
-              </p>
+              <h4>
+                District Courts & Tribunals
+              </h4>
 
               <p>
-                Worked on District Court and Tribunal matters with
-                exposure to Negotiable Instruments Act cases and bank
-                guarantee matters.
-              </p>
-
-              <p>
-                Assisted in drafting LSRs, complaints and client
-                case briefs while organising hearing-related
-                documents and case records.
+                Worked on Negotiable Instruments Act and bank guarantee
+                matters. Drafted LSRs, complaints and client case briefs
+                and assisted with hearing documentation.
               </p>
 
               <div class="tags">
-                <span>NI Act Matters</span>
-                <span>LSR Drafting</span>
-                <span>Client Counselling</span>
+                <span>NI ACT MATTERS</span>
+                <span>LSR DRAFTING</span>
+                <span>CASE BRIEFS</span>
+              </div>
+
+              <div class="certificate-button">
+                <span>VIEW CERTIFICATE</span>
+                <b>↗</b>
               </div>
 
             </div>
@@ -386,118 +525,79 @@
     </section>
 
 
-    <!-- ================= MUN ================= -->
+    <!-- =========================================
+         MUN
+    ========================================= -->
 
-    <section id="mun" class="section mun-section">
+    <section
+      id="mun"
+      class="section cursor-section mun-section"
+      data-cursor="MUN"
+    >
 
-      <div class="section-head reveal">
-        <span>03</span>
-        <h2>MUN & public speaking</h2>
+      <div class="section-heading reveal">
+
+        <span class="section-number">03</span>
+
+        <div>
+          <p class="section-kicker">PUBLIC SPEAKING</p>
+          <h2>MUN & Debating</h2>
+        </div>
+
       </div>
 
 
-      <div class="mun-layout">
+      <div class="mun-grid">
 
 
-        <div class="mun-content">
+        <div class="mun-column reveal">
 
-
-          <!-- PARTICIPATION -->
-
-          <div class="mun-block reveal">
-
-            <div class="mun-heading">
-              <span>01</span>
-              <h3>Participation & Recognition</h3>
-            </div>
-
-            <p class="mun-intro">
-              Active participation in Model United Nations
-              conferences with repeated recognition and awards
-              across committees.
-            </p>
-
-
-            <div class="mun-list">
-
-              <div>
-                <b>Gaurs MUN</b>
-                <span>Participant • Awarded</span>
-              </div>
-
-              <div>
-                <b>Xanthron MUN</b>
-                <span>Participant • Awarded</span>
-              </div>
-
-              <div>
-                <b>Neptunium MUN</b>
-                <span>Participant • Awarded</span>
-              </div>
-
-              <div>
-                <b>Cascade MUN</b>
-                <span>Participant • Awarded</span>
-              </div>
-
-              <div>
-                <b>Manifest MUN</b>
-                <span>Participant • Awarded</span>
-              </div>
-
-              <div>
-                <b>Various Other MUNs</b>
-                <span>Participant • Awarded</span>
-              </div>
-
-            </div>
-
+          <div class="mun-title">
+            <span class="mun-icon">✦</span>
+            <h3>Participation & Winning</h3>
           </div>
 
+          <p class="mun-intro">
+            Active participation in Model United Nations,
+            debating and public-speaking conferences.
+          </p>
 
-          <!-- CHAIRING -->
+          <div class="mun-list">
 
-          <div class="mun-block chair-block reveal">
-
-            <div class="mun-heading">
-              <span>02</span>
-              <h3>Chairperson Experience</h3>
+            <div class="mun-item">
+              <span>01</span>
+              <strong>Gaurs MUN</strong>
+              <small>Participant • Awarded</small>
             </div>
 
-            <p class="mun-intro">
-              Transitioning from delegate to chairperson and
-              committee-management roles, with focus on procedure,
-              moderation and constructive debate.
-            </p>
+            <div class="mun-item">
+              <span>02</span>
+              <strong>Xanthron MUN</strong>
+              <small>Participant • Awarded</small>
+            </div>
 
+            <div class="mun-item">
+              <span>03</span>
+              <strong>Neptunium MUN</strong>
+              <small>Participant • Awarded</small>
+            </div>
 
-            <div class="chair-list">
+            <div class="mun-item">
+              <span>04</span>
+              <strong>Cascade MUN</strong>
+              <small>Participant • Awarded</small>
+            </div>
 
-              <div class="chair-card">
-                <b>Army Public School MUN</b>
-                <span>Prayagraj • Chairperson</span>
-              </div>
+            <div class="mun-item">
+              <span>05</span>
+              <strong>Manifest MUN</strong>
+              <small>Participant • Awarded</small>
+            </div>
 
-              <div class="chair-card">
-                <b>MNNIT MUN</b>
-                <span>Rotary Club Allahabad • Chairperson</span>
-              </div>
-
-              <div class="chair-card">
-                <b>BBS Yuva Manthan</b>
-                <span>Allahabad • Chairperson / Moderator</span>
-              </div>
-
-              <div class="chair-card">
-                <b>DPS Allahabad MUN</b>
-                <span>Chairperson</span>
-              </div>
-
-              <div class="chair-card">
-                <b>Other Conferences</b>
-                <span>Chairing • Moderation • Committee Management</span>
-              </div>
-
+            <div class="mun-item">
+              <span>06</span>
+              <strong>Various Other MUNs</strong>
+              <small>Multiple Awards & Recognitions</small>
             </div>
 
           </div>
@@ -505,96 +605,171 @@
         </div>
 
 
-        <!-- MUN IMAGE -->
+        <div class="mun-column reveal">
 
-        <aside class="mun-image reveal">
+          <div class="mun-title">
+            <span class="mun-icon">◈</span>
+            <h3>Chairperson & Leadership</h3>
+          </div>
 
-          <div class="image-placeholder mun-placeholder">
+          <p class="mun-intro">
+            Experience in chairing committees, moderating debate
+            and managing conference proceedings.
+          </p>
 
-            <span>MUN PHOTO</span>
+          <div class="mun-list">
 
-            <small>
-              Add your MUN / chairperson photograph here
-            </small>
+            <div class="mun-item">
+              <span>01</span>
+              <strong>Army Public School MUN</strong>
+              <small>Chairperson</small>
+            </div>
+
+            <div class="mun-item">
+              <span>02</span>
+              <strong>MNNIT MUN</strong>
+              <small>Chairperson • Rotary Club Allahabad</small>
+            </div>
+
+            <div class="mun-item">
+              <span>03</span>
+              <strong>BBS Yuva Manthan</strong>
+              <small>Political Advisor</small>
+            </div>
+
+            <div class="mun-item">
+              <span>04</span>
+              <strong>DPS Allahabad MUN</strong>
+              <small>Chairperson / Leadership Role</small>
+            </div>
+
+            <div class="mun-item">
+              <span>05</span>
+              <strong>Other Conferences</strong>
+              <small>Chairperson & Moderator</small>
+            </div>
 
           </div>
 
-          <div class="mun-photo-caption">
-            DEBATE • DIPLOMACY • LEADERSHIP
-          </div>
+        </div>
 
-        </aside>
+      </div>
+
+
+      <!-- MUN IMAGE SEPARATE -->
+
+      <div
+        class="mun-photo-card reveal interactive-card"
+        data-cursor="MUN PHOTO"
+      >
+
+        <div class="image-placeholder mun-placeholder">
+
+          <div class="placeholder-icon">◉</div>
+
+          <span>MUN / PUBLIC SPEAKING PHOTO</span>
+
+          <small>
+            Upload MUN photo here
+          </small>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- ================= ACHIEVEMENTS ================= -->
+    <!-- =========================================
+         ACHIEVEMENTS
+    ========================================= -->
 
-    <section id="achievements" class="section achievements-section">
+    <section
+      id="achievements"
+      class="section cursor-section achievements-section"
+      data-cursor="ACHIEVEMENTS"
+    >
 
-      <div class="section-head reveal">
-        <span>04</span>
-        <h2>Other achievements</h2>
+      <div class="section-heading reveal">
+
+        <span class="section-number">04</span>
+
+        <div>
+          <p class="section-kicker">BEYOND THE CLASSROOM</p>
+          <h2>Other Achievements</h2>
+        </div>
+
       </div>
 
 
       <div class="achievement-grid">
 
 
-        <article class="achievement-card reveal">
+        <div
+          class="achievement-card reveal interactive-card"
+          data-cursor="MOOT"
+        >
 
           <span class="achievement-number">
             01
           </span>
+
+          <div class="achievement-icon">
+            ⚖
+          </div>
 
           <h3>
             National Moot Court
           </h3>
 
           <p>
-            Usher at the National Moot Court Competition,
+            Usher at National Moot Court Competition,
             Faculty of Law, University of Allahabad.
           </p>
 
-          <span class="achievement-tag">
-            MOOT COURT
-          </span>
-
-        </article>
+        </div>
 
 
-        <article class="achievement-card reveal">
+        <div
+          class="achievement-card reveal interactive-card"
+          data-cursor="PANEL"
+        >
 
           <span class="achievement-number">
             02
           </span>
 
+          <div class="achievement-icon">
+            ◆
+          </div>
+
           <h3>
-            Moot Court Society
+            National Panel Member
           </h3>
 
           <p>
-            National Panel Member, Moot Court Society,
-            University of Allahabad.
+            Member of the National Panel,
+            Moot Court Society, University of Allahabad.
           </p>
 
-          <span class="achievement-tag">
-            UNIVERSITY
-          </span>
-
-        </article>
+        </div>
 
 
-        <article class="achievement-card reveal">
+        <div
+          class="achievement-card reveal interactive-card"
+          data-cursor="EDITORIAL"
+        >
 
           <span class="achievement-number">
             03
           </span>
 
+          <div class="achievement-icon">
+            ✎
+          </div>
+
           <h3>
-            Newspaper Editorial Committee
+            Editorial Committee
           </h3>
 
           <p>
@@ -602,414 +777,331 @@
             University of Allahabad.
           </p>
 
-          <span class="achievement-tag">
-            EDITORIAL
-          </span>
-
-        </article>
+        </div>
 
 
-        <article class="achievement-card reveal">
+        <div
+          class="achievement-card reveal interactive-card"
+          data-cursor="LEADERSHIP"
+        >
 
           <span class="achievement-number">
             04
           </span>
 
-          <h3>
-            MUN & Public Speaking
-          </h3>
-
-          <p>
-            Participant, Chairperson, Moderator and organiser
-            across multiple MUN and public speaking platforms.
-          </p>
-
-          <span class="achievement-tag">
-            PUBLIC SPEAKING
-          </span>
-
-        </article>
-
-
-        <article class="achievement-card reveal">
-
-          <span class="achievement-number">
-            05
-          </span>
-
-          <h3>
-            Youth & Leadership Platforms
-          </h3>
-
-          <p>
-            Involvement in youth conventions, parliamentary
-            simulations and student-led initiatives.
-          </p>
-
-          <span class="achievement-tag">
-            LEADERSHIP
-          </span>
-
-        </article>
-
-
-        <article class="achievement-card achievement-photo reveal">
-
-          <div class="small-placeholder image-placeholder">
-            <span>ACHIEVEMENT PHOTO</span>
-            <small>Add a relevant event photograph</small>
+          <div class="achievement-icon">
+            ★
           </div>
 
-        </article>
+          <h3>
+            MUN & Leadership
+          </h3>
+
+          <p>
+            MUN participant, chairperson, organiser,
+            public speaker and youth leadership roles.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- DISTINCT ACHIEVEMENT PHOTO -->
+
+      <div
+        class="achievement-photo-section reveal"
+        data-cursor="ACHIEVEMENT PHOTO"
+      >
+
+        <div class="achievement-photo-header">
+
+          <div>
+            <span>VISUAL ARCHIVE</span>
+            <h3>Achievements & Moments</h3>
+          </div>
+
+          <p>
+            A separate space for photographs,
+            certificates and memorable moments.
+          </p>
+
+        </div>
+
+
+        <div class="achievement-photo-frame">
+
+          <div class="image-placeholder achievement-placeholder">
+
+            <div class="placeholder-icon">✦</div>
+
+            <span>ACHIEVEMENT PHOTO</span>
+
+            <small>
+              Upload achievement / certificate photo here
+            </small>
+
+          </div>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- ================= SKILLS ================= -->
+    <!-- =========================================
+         SKILLS
+    ========================================= -->
 
-    <section id="skills" class="section skills-section">
+    <section
+      id="skills"
+      class="section cursor-section skills-section"
+      data-cursor="SKILLS"
+    >
 
-      <div class="section-head reveal">
-        <span>05</span>
-        <h2>Skills & capabilities</h2>
+      <div class="section-heading reveal">
+
+        <span class="section-number">05</span>
+
+        <div>
+          <p class="section-kicker">WHAT I DO</p>
+          <h2>Skills & Capabilities</h2>
+        </div>
+
       </div>
-
-
-      <p class="section-intro reveal">
-        A developing legal and professional skill set built through
-        academic work, litigation exposure, research, drafting,
-        MUNs and leadership responsibilities.
-      </p>
 
 
       <div class="skills-grid">
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="RESEARCH">
           <span>01</span>
-
-          <h3>
-            Legal Research
-          </h3>
-
+          <h3>Legal Research</h3>
           <p>
             Case-law research, statutory interpretation,
-            procedural research and preparation of structured
-            research notes.
+            procedural research and legal issue identification.
           </p>
-
-          <div class="skill-tags">
-            <span>Manupatra</span>
-            <span>SCC Online</span>
-            <span>Case Law</span>
-            <span>Statutes</span>
-          </div>
-
-        </article>
+          <small>
+            Manupatra • SCC Online • Case Analysis
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="DRAFTING">
           <span>02</span>
-
-          <h3>
-            Legal Drafting
-          </h3>
-
+          <h3>Legal Drafting</h3>
           <p>
-            Exposure to pleadings, written statements,
-            written arguments, affidavits, applications,
-            replies and litigation documents.
+            Written statements, applications, replies,
+            affidavits, notices and written submissions.
           </p>
-
-          <div class="skill-tags">
-            <span>Pleadings</span>
-            <span>Affidavits</span>
-            <span>Written Arguments</span>
-            <span>LSRs</span>
-          </div>
-
-        </article>
+          <small>
+            Pleadings • Affidavits • Written Arguments
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="LITIGATION">
           <span>03</span>
-
-          <h3>
-            Litigation & Case Work
-          </h3>
-
+          <h3>Litigation & Case Work</h3>
           <p>
-            Understanding of civil and commercial litigation,
-            court procedures, case records, hearing documents
-            and litigation workflows.
+            Civil and commercial litigation exposure,
+            case preparation and hearing documentation.
           </p>
-
-          <div class="skill-tags">
-            <span>Civil Litigation</span>
-            <span>Commercial Suits</span>
-            <span>Case Files</span>
-          </div>
-
-        </article>
+          <small>
+            Civil Suits • Commercial Matters • Courts
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="BANKING">
           <span>04</span>
-
-          <h3>
-            Banking & Recovery
-          </h3>
-
+          <h3>Banking & Recovery</h3>
           <p>
-            Exposure to DRT proceedings, bank loan recovery,
-            bank guarantees and financial litigation matters.
+            Exposure to DRT proceedings, bank loan recovery
+            and financial litigation documentation.
           </p>
-
-          <div class="skill-tags">
-            <span>DRT</span>
-            <span>Banking</span>
-            <span>Recovery</span>
-            <span>Guarantees</span>
-          </div>
-
-        </article>
+          <small>
+            DRT • Bank Recovery • Guarantees
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="ARBITRATION">
           <span>05</span>
-
-          <h3>
-            Arbitration & Dispute Resolution
-          </h3>
-
+          <h3>Arbitration & Disputes</h3>
           <p>
-            Research exposure covering arbitration procedure,
-            Section 34 proceedings, interim relief and
-            dispute-resolution issues.
+            Research and drafting exposure involving
+            arbitration, disputes and procedural strategy.
           </p>
-
-          <div class="skill-tags">
-            <span>Arbitration</span>
-            <span>Section 34</span>
-            <span>Disputes</span>
-          </div>
-
-        </article>
+          <small>
+            Arbitration • Section 34 • Dispute Research
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="INSOLVENCY">
           <span>06</span>
-
-          <h3>
-            Consumer & Insolvency Research
-          </h3>
-
+          <h3>Consumer & Insolvency</h3>
           <p>
-            Research exposure to consumer disputes,
-            intermediary/service-provider issues and
-            insolvency-related legal questions.
+            Research exposure across consumer disputes,
+            insolvency matters and related legal issues.
           </p>
-
-          <div class="skill-tags">
-            <span>Consumer Law</span>
-            <span>IBC</span>
-            <span>Legal Research</span>
-          </div>
-
-        </article>
+          <small>
+            Consumer Law • IBC • Legal Research
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="SPEAKING">
           <span>07</span>
-
-          <h3>
-            Debating & Public Speaking
-          </h3>
-
+          <h3>Debating & Public Speaking</h3>
           <p>
-            Strong interest and practical experience in debating,
-            MUNs, structured arguments, committee discussions
-            and public speaking.
+            MUNs, debating, youth parliament and
+            structured public speaking.
           </p>
-
-          <div class="skill-tags">
-            <span>Debating</span>
-            <span>Public Speaking</span>
-            <span>Advocacy</span>
-          </div>
-
-        </article>
+          <small>
+            MUN • Debate • Advocacy
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="LEADERSHIP">
           <span>08</span>
-
-          <h3>
-            Leadership & Teamwork
-          </h3>
-
+          <h3>Leadership & Teamwork</h3>
           <p>
-            Experience working in committees, organising events,
-            chairing sessions, coordinating participants and
-            collaborating in team environments.
+            Chairperson experience, event coordination,
+            committee work and team management.
           </p>
-
-          <div class="skill-tags">
-            <span>Leadership</span>
-            <span>Teamwork</span>
-            <span>Coordination</span>
-          </div>
-
-        </article>
+          <small>
+            Leadership • Coordination • Teamwork
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="ANALYSIS">
           <span>09</span>
-
-          <h3>
-            Critical Analysis
-          </h3>
-
+          <h3>Critical Analysis</h3>
           <p>
-            Issue spotting, structured reasoning, case analysis,
-            judgment summaries and converting complex material
-            into clear arguments.
+            Structured reasoning, issue spotting,
+            argument building and case analysis.
           </p>
-
-          <div class="skill-tags">
-            <span>Analysis</span>
-            <span>Reasoning</span>
-            <span>Issue Spotting</span>
-          </div>
-
-        </article>
+          <small>
+            Reasoning • Strategy • Argumentation
+          </small>
+        </div>
 
 
-        <article class="skill-card reveal">
-
+        <div class="skill-card reveal" data-cursor="TOOLS">
           <span>10</span>
-
-          <h3>
-            Research & Productivity Tools
-          </h3>
-
+          <h3>Research & Productivity Tools</h3>
           <p>
-            Comfortable working with legal databases and common
-            productivity tools for research, drafting,
-            presentations and documentation.
+            Legal databases and productivity tools
+            used for research, drafting and presentations.
           </p>
-
-          <div class="skill-tags">
-            <span>MS Word</span>
-            <span>Excel</span>
-            <span>PowerPoint</span>
-            <span>AI Research</span>
-          </div>
-
-        </article>
+          <small>
+            SCC • Manupatra • Word • Excel • PowerPoint • AI
+          </small>
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- ================= CONTACT ================= -->
+    <!-- =========================================
+         CONTACT
+    ========================================= -->
 
-    <section id="contact" class="contact">
+    <section
+      id="contact"
+      class="section cursor-section contact-section"
+      data-cursor="CONTACT"
+    >
 
-      <div class="contact-inner">
+      <div class="section-heading reveal">
+
+        <span class="section-number">06</span>
+
+        <div>
+          <p class="section-kicker">LET'S CONNECT</p>
+          <h2>Contact</h2>
+        </div>
+
+      </div>
+
+
+      <div class="contact-grid">
 
 
         <div class="contact-copy reveal">
 
-          <p class="eyebrow">
-            06 • CONTACT
+          <p class="contact-large">
+            Open to litigation internships,
+            legal research roles and
+            judicial chamber opportunities.
           </p>
 
-          <h2>
-            Let's connect.
-          </h2>
-
-          <p>
-            Open to litigation internships, legal research
-            opportunities, judicial chamber work, MUN
-            opportunities and academic collaborations.
-          </p>
-
-
-          <div class="contact-links">
-
-
-            <!-- EMAIL -->
+          <div class="contact-details">
 
             <a
               href="mailto:shubhamrajverma66@gmail.com"
-              class="contact-link"
+              class="contact-item"
+              data-cursor="EMAIL"
             >
 
               <span class="contact-icon">
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M4 5H20C21.1 5 22 5.9 22 7V17C22 18.1 21.1 19 20 19H4C2.9 19 2 18.1 2 17V7C2 5.9 2.9 5 4 5Z"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                  />
-                  <path
-                    d="M3 7L12 13L21 7"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                  />
-                </svg>
-
+                ✉
               </span>
 
-              <span>
+              <div>
                 <small>EMAIL</small>
-                shubhamrajverma66@gmail.com
-              </span>
-
-              <b>↗</b>
+                <strong>
+                  shubhamrajverma66@gmail.com
+                </strong>
+              </div>
 
             </a>
 
 
-            <!-- LINKEDIN -->
-
             <a
-              href="https://www.linkedin.com/in/shubham-raj-verma-060a69342"
+              href="https://www.linkedin.com/"
               target="_blank"
-              rel="noopener"
-              class="contact-link"
+              class="contact-item"
+              data-cursor="LINKEDIN"
             >
 
               <span class="contact-icon linkedin-icon">
                 in
               </span>
 
-              <span>
+              <div>
                 <small>LINKEDIN</small>
-                Shubham Raj
-              </span>
-
-              <b>↗</b>
+                <strong>
+                  Connect with me
+                </strong>
+              </div>
 
             </a>
+
+
+            <div
+              class="contact-item"
+              data-cursor="LOCATION"
+            >
+
+              <span class="contact-icon">
+                ◉
+              </span>
+
+              <div>
+                <small>LOCATION</small>
+                <strong>
+                  Noida, U.P. • Delhi NCR
+                </strong>
+              </div>
+
+            </div>
 
           </div>
 
@@ -1018,20 +1110,28 @@
 
         <!-- CONTACT PHOTO -->
 
-        <div class="contact-photo-wrap reveal">
+        <div
+          class="contact-photo-card reveal"
+          data-cursor="PROFILE"
+        >
 
-          <div class="contact-photo image-placeholder">
+          <div class="contact-photo">
 
-            <span>YOUR PHOTO</span>
-
-            <small>
-              Add another profile / professional photograph here
-            </small>
+            <img
+              src="profile.jpg"
+              alt="Shubham Raj"
+            >
 
           </div>
 
-          <div class="contact-photo-label">
-            SHUBHAM RAJ • LAW STUDENT
+          <div class="contact-photo-text">
+
+            <span>SHUBHAM RAJ</span>
+
+            <small>
+              LAW STUDENT • ADVOCACY • LEADERSHIP
+            </small>
+
           </div>
 
         </div>
@@ -1043,16 +1143,83 @@
   </main>
 
 
-  <!-- ================= FOOTER ================= -->
+  <!-- =========================================
+       CERTIFICATE MODAL
+  ========================================= -->
+
+  <div
+    class="certificate-modal"
+    id="certificateModal"
+  >
+
+    <div class="certificate-backdrop"></div>
+
+    <div class="certificate-window">
+
+      <button
+        class="certificate-close"
+        aria-label="Close certificate"
+      >
+        ×
+      </button>
+
+      <div class="certificate-window-header">
+
+        <span>
+          INTERNSHIP CERTIFICATE
+        </span>
+
+        <small>
+          Click outside or press × to close
+        </small>
+
+      </div>
+
+      <div class="certificate-image-container">
+
+        <img
+          id="certificateImage"
+          src=""
+          alt="Internship Certificate"
+        >
+
+        <div
+          class="certificate-placeholder"
+          id="certificatePlaceholder"
+        >
+
+          <div>📜</div>
+
+          <strong>
+            CERTIFICATE IMAGE
+          </strong>
+
+          <span>
+            Upload the certificate image with the
+            correct filename to display it here.
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================= -->
 
   <footer>
 
-    <span>
-      © 2026 Shubham Raj
-    </span>
+    <div>
+      SHUBHAM RAJ
+    </div>
 
     <span>
-      B.A. LL.B. (HONS.) • UNIVERSITY OF ALLAHABAD
+      B.A. LL.B. (HONS.) • LAW • ADVOCACY • LEADERSHIP
     </span>
 
   </footer>
